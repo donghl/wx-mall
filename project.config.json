@@ -10,7 +10,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.0.0",
 	"appid": "wx34df2486848234c5",
-	"projectname": "wxapp-mall",
+	"projectname": "wx-mall",
 	"isGameTourist": false,
 	"condition": {
 		"search": {

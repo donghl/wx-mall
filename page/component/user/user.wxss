@@ -10,6 +10,7 @@
     font-size: 28rpx;
     color: #fff;
 }
+
 .header .thumb{
     position: absolute;
     left: 30rpx;
@@ -24,7 +25,7 @@
 
 .address-box{
     border-bottom: 20rpx solid #ededed;
-    color: #999;
+    color: #919;
     line-height: 90rpx;
     font-size: 28rpx;
 }
@@ -32,7 +33,7 @@
     position: relative;
     height: 90rpx;
     border-bottom: 1rpx solid #e9e9e9;
-    text-align: center;
+    text-align: left;
 }
 .address-box .address-manage::after{
     position: absolute;
@@ -60,12 +61,15 @@
 .orders-box{
     color: #999;
     font-size: 28rpx;
+     border-bottom: 40rpx solid #ededed;
+    line-height: 90rpx;
+
 }
 .orders{
     height: 90rpx;
     line-height: 90rpx;
     border-bottom: 1rpx solid #e9e9e9;
-    text-align: center;
+    text-align: left;
 }
 .orders-list{
     padding-left: 30rpx;
@@ -85,7 +89,7 @@
     padding: 35rpx 20rpx 35rpx 170rpx;
     border-bottom: 1rpx solid #e9e9e9;
 }
-.orders-detail image{
+.orders-detail .image{
     position: absolute;
     left: 0;
     top: 20rpx;

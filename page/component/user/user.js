@@ -25,10 +25,10 @@ Page({
      * 发起请求获取订单列表信息
      */
     wx.request({
-      url: 'https://www.donghl.cn/api/v1/acl',
+      url: 'https://www.donghl.cn/api/v1/order',
       success(res){
         self.setData({
-          orders: res.data
+          // orders: res.data
         })
       }
     })
@@ -47,6 +47,8 @@ Page({
         })
       }
     })
+
+    console.log(this.data)
   },
   /**
    * 发起支付请求

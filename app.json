@@ -9,7 +9,9 @@
       "page/component/details/details",
       "page/component/list/list",
       "page/component/demo/demo",
-      "page/component/demo1/demo"
+      "page/component/guide/demo",
+      "page/component/about/about",
+      "page/component/apply/apply"
   ],
   "window": {
     "navigationBarTextStyle": "#ffffff",
@@ -29,16 +31,17 @@
       "selectedIconPath": "image/button/11.png",
       "text": "主页"
     },{
-      "pagePath": "page/component/category/category",
+      "pagePath": "page/component/guide/demo",
       "iconPath": "image/button/22.png",
       "selectedIconPath": "image/button/21.png",
       "text": "导购"
-    }, {
-      "pagePath": "page/component/demo1/demo",
+    }, 
+    {
+      "pagePath": "page/component/category/category",
       "iconPath": "image/button/22.png",
       "selectedIconPath": "image/button/21.png",
-      "text": "拼团"
-    }, 
+      "text": "搜索"
+    },
     {
       "pagePath": "page/component/cart/cart",
       "iconPath": "image/button/32.png",
@@ -60,3 +63,4 @@
   },
   "debug": true
 }
+

@@ -6,6 +6,7 @@
             </swiper-item>
         </block>
     </swiper>
+
     <view class="selected">
         <!-- view class="select-title"><text>精选主题</text></view -->
         <view class="select-top">

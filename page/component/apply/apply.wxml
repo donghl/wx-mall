@@ -1,0 +1,35 @@
+<view id="panel" class="flex-column">
+  <view class="flex-row" style="display: flex; flex-direction: row; justify-content:center;">
+    <view class="flex-view-item">提交身份证信息-></view>
+    <view class="flex-view-item">审核-></view>
+    <view class="flex-view-item">通过</view>
+  </view>
+  <view class="flex-cell flex-row">
+    <view class="flex-view-item">ID:</view>
+    <text class="home-text1">{{obj.openid}}</text>
+  </view>
+  <view class="flex-cell flex-row">
+    <button class='button' id='1' data-name='zheng' bindtap='chooseImage'>身份证正面</button>
+  </view>
+  <view class="flex-row flex-cell">
+    <button class='button' id='2' data-name='fan' bindtap='chooseImage'>身份证反面</button>
+  </view>
+    <view class="flex-row flex-cell">
+    <button class='button' id='2' data-name='he' bindtap='chooseImage'>手持身份证照片</button>
+  </view>
+</view>
+
+<view>
+
+  <view class="flex-column" style="display: flex; flex-direction: column;">
+    <view class="flex-view-item">
+      <view class="home-view-line"></view>
+      <progress percent="{{progress}}" show-info="true" color="red" stroke-width="10" activeColor="green" backgroundColor="#ccc" />
+      <button class='button.submit' bindtap='submit'>确定</button>
+    </view>
+    <view class="flex-view-item">c2</view>
+    <view class="flex-view-item">c3</view>
+  </view>
+</view>
+
+<view id="tapTest" data-hi="WeChat" bindtap="tapName"> Click me! </view>
