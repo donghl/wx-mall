@@ -1,0 +1,11 @@
+<view class="main">
+    <view class="form-box">
+        <form bindsubmit="formSubmit">
+           <button bindtap='getAddress'>获取地址</button> 
+            <input value="{{address.userName}}" name="userName" placeholder="姓名"/>
+            <input type="number" name="telNumber" value="{{address.telNumber}}" placeholder="电话号码"/>
+            <input name="detail" value="{{address.provinceName}}{{address.cityName}}{{address.countyName}}{{address.detailInfo}}" placeholder="详细地址"/>
+            <button form-type="submit">保存</button>
+        </form>
+    </view>
+</view>

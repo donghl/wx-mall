@@ -22,30 +22,29 @@ App({
 
         if (res.code) {
           var code = res.code;
-          wx.getUserInfo({
-            success: function (res) { 
-              // var simpleUser = res.userInfo;
-              // console.log(res);
-              // console.log(simpleUser.nickName);
 
-              wx.request({
-                method: 'GET',
-                url: 'https://www.donghl.cn/api/v1/wx',
-                data: { code, appid, secret },
-                header: {
-                  'content-type': 'application/json'
-                },
-                success: function (res) {
-                  console.log(res.data) //获取openid  
-                  wx.setStorageSync('Obj', res.data.data)
-                }
-              })
+          wx.request({
+            method: 'GET',
+            url: 'https://www.donghl.cn/api/v1/wx',
+            data: { code, appid, secret },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              console.log('----------------- app Init success ----------------- ')
+              console.log(res.data) //获取openid  
+              wx.setStorageSync('Obj', res.data.data)
+            },
+            fail: function (res) {
+              console.log('----------------- app Init fail ----------------- ')
             }
-          });
+          })
         }
       }
     });
   },
+
+
 
   globalData: {
     hasLogin: false

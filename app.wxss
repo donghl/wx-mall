@@ -211,6 +211,261 @@ checkbox, radio{
     padding-left: 0;
     padding-right: 0;
 }
-.section__ctn{
 
+
+.row {
+  display: block;
+  margin: 0px;
+}
+
+.col {
+  display: flex;
+  font-family: -apple-system-font, "Helvetica Neue", sans-serif;
+  font-size: 17px;
+}
+
+.col>.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9,
+.col-10, .col-11, .col-12 {
+  overflow: hidden;
+}
+
+.col-1 {
+  width: 8.33333333333333%;
+}
+
+.col-2 {
+  width: 16.6666666666666%;
+}
+
+.col-3 {
+  width: 25%;
+}
+
+.col-4 {
+  width: 33.3333333333333%;
+}
+
+.col-5 {
+  width: 41.6666666666666%;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.col-7 {
+  width: 58.333333333333333%;
+}
+
+.col-8 {
+  width: 66.66666666666666%;
+}
+
+.col-9 {
+  width: 75%;
+}
+
+.col-10 {
+  width: 83.33333333333333%;
+}
+
+.col-11 {
+  width: 91.66666666666666%;
+}
+
+.col-12 {
+  width: 100%;
+}
+
+.x-center {
+  text-align: center;
+}
+
+
+
+page {
+  background-color: #fff;
+  font-family: "Helvetica Neue",
+                 "Hiragino Sans GB",
+                 "Microsoft YaHei",
+                 "\9ED1\4F53",
+                 Arial,
+                 sans-serif;
+  font-size: 32rpx;
+}
+
+ .line {
+  width: 100%;
+  height: 20rpx;
+  background: #aaa;
+} 
+
+.circle-float {
+  color: #fff;
+  position: fixed;
+  /* position: absolute; */
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 80rpx;
+  right: 80rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  font-size: 58rpx;
+  background: #4eee94;
+}
+
+.circle-images {
+  position: fixed;
+  /* position: absolute; */
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 80rpx;
+  right: 80rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  font-size: 58rpx;
+  background: #4eee94;
+}
+
+.navigator-hover {
+  background: none;
+}
+
+.select-bottom, .select-top {
+  width: 100%;
+  height: 350rpx;
+}
+
+/*横向布局  */
+
+.layout_horizontal {
+  height: 60rpx;
+  width: 100%;
+  display: flex;
+  /*row 横向  column 列表  */
+}
+
+/*纵向布局  */
+
+.layout_vertical {
+  height: 100rpx;
+  display: flex;
+  /*row 横向  column 列表  */
+  flex-direction: column;
+}
+
+/*划线  */
+
+
+.item1 {
+  height: 50rpx;
+  width: 100%;
+  text-align: center;
+  /* background-color:cyan; */
+  border: 1px solid #fff;
+  /* flex-shrink: 1 */
+}
+
+.product_image {
+  opacity: 0;
+  width: 100%;
+  height: 70%;
+  transition: opacity1slinear2s;
+}
+
+.loaded {
+  opacity: 1;
+}
+
+.input {
+  padding-left: 10px;
+  height: 44px;
+}
+
+.inputView {
+  border: 2px solid blue;
+  background: #fff;
+  width: 80%;
+  margin: 30rpx auto;
+  position: relative;
+}
+
+.tab-h {
+  height: 80rpx;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  line-height: 80rpx;
+  background: #f7f7f7;
+  font-size: 16px;
+  white-space: nowrap;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+.tab-orders {
+  height: 80rpx;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  line-height: 80rpx;
+  background: #f7f7f7;
+  font-size: 16px;
+  white-space: nowrap;
+  position: fixed;
+  /* top: 0; *//* left: 0; */
+  z-index: 99;
+}
+
+.tab-item {
+  margin: 0 25rpx;
+  display: inline-block;
+}
+
+.tab-item.active {
+  color: #4675f9;
+  position: relative;
+}
+
+.tab-item.active:after {
+  content: "";
+  display: block;
+  height: 8rpx;
+  /* width: 48rpx; */
+  background: #4675f9;
+  position: absolute;
+  bottom: 0;
+  left: 5rpx;
+  border-radius: 16rpx;
+}
+
+.button.aa {
+  /* color: #fff; */
+  width: 20%;
+}
+
+.button.bb {
+  /* color: #fff; */
+  height: 20 rpx;
+  width: 20 rpx;
+}
+
+.button.bb {
+  /* color: #fff; */
+  height: 20 rpx;
+  width: 20 rpx;
+}
+
+.edit.cem {
+  /* color: #fff; */
+  height: 200 rpx;
+  width: 100%;
 }
