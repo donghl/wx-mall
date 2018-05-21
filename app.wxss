@@ -11,7 +11,6 @@ page {
 }
 .page-header {
   display: flex;
-  font-size: 32rpx;
   color: #aaa;
   justify-content: center;
   margin-top: 50rpx;
@@ -54,15 +53,12 @@ page {
 }
 .page-body-title {
   margin-bottom: 100rpx;
-  font-size: 32rpx;
 }
 .page-body-text {
-  font-size: 30rpx;
   line-height: 26px;
   color: #ccc;
 }
 .page-body-text-small {
-  font-size: 24rpx;
   color: #000;
   margin-bottom: 100rpx;
 }
@@ -93,7 +89,6 @@ page {
   justify-content: space-between;
   height: 100rpx;
   align-items: center;
-  font-size: 36rpx;
   margin-left: 20rpx;
   padding-right: 20rpx;
   border-bottom: 1px solid #eee;
@@ -115,7 +110,6 @@ page {
 .page-footer {
   text-align: center;
   color: #1aad19;
-  font-size: 24rpx;
   margin: 20rpx 0;
 }
 
@@ -179,7 +173,6 @@ checkbox, radio{
     min-height: 100%;
     flex: 1;
     background-color: #FBF9FE;
-    font-size: 16px;
     font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
     overflow: hidden;
 }
@@ -188,11 +181,9 @@ checkbox, radio{
 }
 .page__title{
     display: block;
-    font-size: 20px;
 }
 .page__desc{
     margin-top: 5px;
-    font-size: 14px;
     color: #888888;
 }
 
@@ -221,7 +212,6 @@ checkbox, radio{
 .col {
   display: flex;
   font-family: -apple-system-font, "Helvetica Neue", sans-serif;
-  font-size: 17px;
 }
 
 .col>.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9,
@@ -291,7 +281,6 @@ page {
                  "\9ED1\4F53",
                  Arial,
                  sans-serif;
-  font-size: 32rpx;
 }
 
  .line {
@@ -313,7 +302,6 @@ page {
   width: 120rpx;
   height: 120rpx;
   border-radius: 50%;
-  font-size: 58rpx;
   background: #4eee94;
 }
 
@@ -329,7 +317,6 @@ page {
   width: 120rpx;
   height: 120rpx;
   border-radius: 50%;
-  font-size: 58rpx;
   background: #4eee94;
 }
 
@@ -403,7 +390,6 @@ page {
   overflow: hidden;
   line-height: 80rpx;
   background: #f7f7f7;
-  font-size: 16px;
   white-space: nowrap;
   position: fixed;
   top: 0;
@@ -418,7 +404,6 @@ page {
   overflow: hidden;
   line-height: 80rpx;
   background: #f7f7f7;
-  font-size: 16px;
   white-space: nowrap;
   position: fixed;
   /* top: 0; *//* left: 0; */
@@ -445,27 +430,4 @@ page {
   bottom: 0;
   left: 5rpx;
   border-radius: 16rpx;
-}
-
-.button.aa {
-  /* color: #fff; */
-  width: 20%;
-}
-
-.button.bb {
-  /* color: #fff; */
-  height: 20 rpx;
-  width: 20 rpx;
-}
-
-.button.bb {
-  /* color: #fff; */
-  height: 20 rpx;
-  width: 20 rpx;
-}
-
-.edit.cem {
-  /* color: #fff; */
-  height: 200 rpx;
-  width: 100%;
 }

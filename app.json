@@ -1,19 +1,19 @@
 {
   "pages": [
-    "page/index",
-    "page/category/category",
-    "page/cart/cart",
-    "page/user/user",
-    "page/goods/goods",
-    "page/goods/edit",
-    "page/goods/add",
-    "page/address/list",
-    "page/address/address",
-    "page/orders/list",
-    "page/orders/orders",
-    "page/details/details",
-    "page/guide/demo",
-    "page/apply/apply"
+    "pages/0index/index",
+    "pages/category/category",
+    "pages/cart/cart",
+    "pages/user/user",
+    "pages/goods/goods",
+    "pages/goods/edit",
+    "pages/goods/add",
+    "pages/address/list",
+    "pages/address/address",
+    "pages/orders/list",
+    "pages/orders/orders",
+    "pages/details/details",
+    "pages/guide/demo",
+    "pages/apply/apply"
   ],
   "window": {
     "navigationBarTextStyle": "#ffffff",
@@ -29,31 +29,31 @@
     "backgroundColor": "#f5f5f5",
     "list": [
       {
-        "pagePath": "page/index",
+        "pagePath": "pages/0index/index",
         "iconPath": "image/button/12.png",
         "selectedIconPath": "image/button/11.png",
         "text": "主页"
       },
       {
-        "pagePath": "page/goods/add",
+        "pagePath": "pages/goods/add",
         "iconPath": "image/button/22.png",
         "selectedIconPath": "image/button/21.png",
         "text": "临时"
       },
       {
-        "pagePath": "page/category/category",
+        "pagePath": "pages/category/category",
         "iconPath": "image/button/22.png",
         "selectedIconPath": "image/button/21.png",
         "text": "分类"
       },
       {
-        "pagePath": "page/cart/cart",
+        "pagePath": "pages/cart/cart",
         "iconPath": "image/button/32.png",
         "selectedIconPath": "image/button/31.png",
         "text": "购物车"
       },
       {
-        "pagePath": "page/user/user",
+        "pagePath": "pages/user/user",
         "iconPath": "image/button/42.png",
         "selectedIconPath": "image/button/41.png",
         "text": "我的"
