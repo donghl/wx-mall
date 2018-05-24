@@ -1,49 +1,48 @@
 // pages/new-pages/user/address/address.js
 Page({
-  data:{
-    address:{
-      userName:'',
-      telNumber:'',
-      detail:''
+  data: {
+    address: {
     }
   },
-  onShow(){
+  onShow() {
 
   },
-  onLoad(){
+  onLoad() {
     var self = this;
-    
-    wx.getStorage({
-      key: 'address',
-      success: function(res){
-        console.log('1111111111111111111')
-        console.log(res)
-        self.setData({
-          address : res.data
-        })
-        console.log(address)
-      }
+    self.setData({
+      address: wx.getStorageSync('address') || []
     })
+    // wx.getStorage({
+    //   key: 'address',
+    //   success: function(res){
+    //     console.log('1111111111111111111')
+    //     console.log(res)
+    //     self.setData({
+    //       address : res.data
+    //     })
+    //     console.log(address)
+    //   }
+    // })
   },
-  formSubmit(e){
+  formSubmit(e) {
     const value = e.detail.value;
-    if (value.userName && value.telNumber && value.detail){
+    if (value.userName && value.telNumber && value.detail) {
       wx.setStorage({
         key: 'address',
         data: value,
-        success(){
+        success() {
           wx.navigateBack();
         }
       })
-    }else{
+    } else {
       wx.showModal({
-        title:'提示',
-        content:'请填写完整资料',
-        showCancel:false
+        title: '提示',
+        content: '请填写完整资料',
+        showCancel: false
       })
     }
   },
-  getAddress:function(){
+  getAddress: function () {
     let self = this;
     wx.chooseAddress({
       success: function (res) {
@@ -56,7 +55,7 @@ Page({
         console.log(res.nationalCode)
         console.log(res.telNumber)
         self.setData({
-          address :res
+          address: res
         })
       }
     })

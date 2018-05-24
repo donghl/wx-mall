@@ -8,7 +8,6 @@
     "pages/goods/edit",
     "pages/goods/add",
     "pages/address/list",
-    "pages/address/address",
     "pages/orders/list",
     "pages/orders/orders",
     "pages/details/details",
@@ -33,12 +32,6 @@
         "iconPath": "image/button/12.png",
         "selectedIconPath": "image/button/11.png",
         "text": "主页"
-      },
-      {
-        "pagePath": "pages/goods/add",
-        "iconPath": "image/button/22.png",
-        "selectedIconPath": "image/button/21.png",
-        "text": "临时"
       },
       {
         "pagePath": "pages/category/category",

@@ -1,20 +1,12 @@
 // pages/apply/apply.js
+var config = require('../../config/config.js')
+var api = require('../../config/api.config.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    openid: null,
-    zheng: null,
-    fan: null,
-
-    // show: false,//控制下拉列表的显示隐藏，false隐藏、true显示
-    // array: ['北美', '欧洲', '东南亚', '日韩', '港澳台', '大陆'],//下拉列表的数据
-    // zone: 0,//选择的下拉列表下标
-    name: null,
-    card: null,
-
   },
 
   // bindPickerChange: function (e) {
@@ -65,7 +57,7 @@ Page({
 
     wx.request({
       method: 'GET',
-      url: 'https://www.donghl.cn/api/v1/apply',
+      url: api.applyApi.url,  //'https://www.donghl.cn/api/v1/apply',
       data: { openid },
       header: {
         'content-type': 'application/json'
@@ -240,5 +232,4 @@ Page({
     });
 
   }
-
 })

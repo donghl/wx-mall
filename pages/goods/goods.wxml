@@ -5,40 +5,22 @@
     </navigator>
   </view>
 
-  <view class="list-box">
-    <view class="newest-list">
-      <navigator url="../goods/edit?id=123">
-        <image src="/image/s4.png"></image>
-        <view class="newest-text">
-          <text>瓜子 100g</text>
+  <view class="group-list">
+    <!-- <view class="list-box">
+    <view class="newest-list"> -->
+    <block wx:for="{{goods}}" wx:key="index" wx:for-index="index">
+      <view class="box" bindtap="buyView">
+        <image src="{{item.img}}" style="width:369rpx;height:370rpx;" class="image"></image>
+        <view class="title">
+          <text>{{item.name}}</text>
         </view>
-        <view class="newest-text">
-          <text>￥ 0.01</text>
+        <view class="price">
+          <text>￥{{item.price}}</text>
+          <text class="num">销量：{{item.sell}}</text>
         </view>
-      </navigator>
-    </view>
-    <view class="newest-list">
-      <navigator url="../goods/edit?id=123">
-        <image src="/image/s5.png"></image>
-        <view class="newest-text">
-          <text>芹菜 半斤</text>
-        </view>
-        <view class="newest-text">
-          <text>￥ 0.02</text>
-        </view>
-      </navigator>
-    </view>
-    <view class="newest-list">
-      <navigator url="../goods/edit?id=123">
-        <image src="/image/s6.png"></image>
-        <view class="newest-text">
-          <text>素米 375g</text>
-        </view>
-        <view class="newest-text">
-          <text>￥ 0.03</text>
-        </view>
-      </navigator>
-    </view>
+      </view>
+    </block>
+    <!-- </view> -->
   </view>
   <navigator url="../goods/add">
     <button class='.circle-float'>┼</button>

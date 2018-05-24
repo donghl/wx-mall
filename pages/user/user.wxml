@@ -45,8 +45,8 @@
   </view>
 
   <view class="address-box">
-    <view class="address-manage">
-      <navigator url="/pages/address/address">收货地址</navigator>
+    <view class="address-manage" bindtap='getAddress'>
+      <text>收货地址</text>
     </view>
     <!-- <view wx:if="{{hasAddress}}" class="address-list">
       <view>{{address.userName}}</view>
@@ -55,18 +55,25 @@
     </view> -->
   </view>
 
+  <view class="address-box" data-type="about" bindtap="getUserInfo">
 
-  <view wx:if='{{status !=2 }}' class="address-box">
-    <!-- <view class="orders">申请成为导购</view> -->
-    <navigator url="/pages/apply/apply">申请成为导购</navigator>
+    <view wx:if='{{status !=2 }}' class="address-box">
+      <!-- <view class="orders">申请成为导购</view> -->
+      <navigator url="/pages/apply/apply">入住申请</navigator>
+    </view>
   </view>
-
-  <view wx:if='{{status}}' class="address-box">
-    <!-- <view class="orders">申请成为导购</view> -->
-    <navigator url="/pages/goods/goods">管理货品</navigator>
+  <view class="address-box" data-type="about" bindtap="getUserInfo">
+    <view wx:if='{{status}}' class="address-box">
+      <!-- <view class="orders">申请成为导购</view> -->
+      <navigator url="/pages/goods/goods">管理货品</navigator>
+    </view>
   </view>
-
-  <view class="address-box" data-type="关于我们" bindtap="getUserInfo">
+  <!-- <view class="address-box" data-type="本机信息" bindtap="getSystemInfo">
+    <view class="address-manage">
+      <text class="user-list-title">本机信息</text>
+    </view>
+  </view> -->
+  <view class="address-box" data-type="about" bindtap="getUserInfo">
     <view class="address-manage">
       <text class="user-list-title">关于我们</text>
     </view>

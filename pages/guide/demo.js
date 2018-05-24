@@ -1,4 +1,5 @@
 var app = getApp();
+
 Page({
   data: {
     winHeight: "",//窗口高度
@@ -57,5 +58,4 @@ Page({
       }
     });
   },
-  footerTap: app.footerTap
 })

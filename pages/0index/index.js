@@ -1,4 +1,6 @@
 // 引入SDK核心类
+var util = require('../../utils/util.js')
+
 var QQMapWX = require('../../lib/qqmap/qqmap-wx-jssdk.js');
 //获取应用实例
 var app = getApp()
@@ -41,6 +43,10 @@ Page({
         }
       }
     })
+
+
+
+
 
     wx.getLocation({
       // type: 'gcj02',

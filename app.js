@@ -1,11 +1,22 @@
+var config=require('./config/config.js')
+var api =require('./config/api.config.js')
+
 App({
   onLaunch: function () {
-    console.log('App Launch')
+    console.log('--------------- App Launch----------------')
+    console.log(api);
+
 
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log('--------------- App Launch----------------111')
+        console.log(res);
+      },
+      fail:res=>{
+        console.log(res);
+        console.log('--------------- App Launch----------------222')
       }
     })
     // 获取用户信息
@@ -28,7 +39,7 @@ App({
         }
       }
     })
-    
+
     this.Init();
   },
 
@@ -38,8 +49,9 @@ App({
 
     wx.login({
       success: function (res) {
-        var appid = 'wx34df2486848234c5'; //填写微信小程序appid  
-        var secret = 'dfdcc86d8e7fffd9defd94267dd4ce09'; //填写微信小程序secret  
+        var appid = config.appid;//''; //填写微信小程序appid  
+        var secret = config.secret; //''; //填写微信小程序secret
+
         console.log(res.code);
 
         if (res.code) {
@@ -47,7 +59,7 @@ App({
 
           wx.request({
             method: 'GET',
-            url: 'https://www.donghl.cn/api/v1/wx',
+            url: api.wxApi.url,//'https://www.donghl.cn/api/v1/wx',
             data: { code, appid, secret },
             header: {
               'content-type': 'application/json'
@@ -55,7 +67,7 @@ App({
             success: function (res) {
               console.log('----------------- app Init success ----------------- ')
               console.log(res.data) //获取openid  
-              wx.setStorageSync('Obj', res.data.data)
+              wx.setStorageSync('user', res.data.data)
             },
             fail: function (res) {
               console.log('----------------- app Init fail ----------------- ')
@@ -65,9 +77,6 @@ App({
       }
     });
   },
-
-
-
   globalData: {
     hasLogin: false,
     userInfo: null

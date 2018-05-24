@@ -1,3 +1,5 @@
+var config = require('../../config/config.js')
+var api = require('../../config/api.config.js')
 Page({
     data: {
         category: [
@@ -12,7 +14,7 @@ Page({
       console.log('onLoad')
         var self = this;
       wx.request({
-        url: 'https://www.donghl.cn/api/v1/login',
+        url: api.loginApi.url,//'https://www.donghl.cn/api/v1/login',
         method: "POST",
         data: { "username": "aaa", "password": "12345678" },
         success(res) {
@@ -30,11 +32,12 @@ Page({
       let cookie = wx.getStorageSync('cookie');
       var self = this;
       wx.request({
-        url: 'https://www.donghl.cn/api/v1/category',
+        url: api.categoryApi.url,//'https://www.donghl.cn/api/v1/category',
+        // url:'https://www.easy-mock.com/mock/5ad6cd85baad39136d1d293d/api/api/v1/category',
         success(res) {
           console.log(res)
           self.setData({
-            category: res.data.data.rows
+            category: res.data
           })
         }
       })

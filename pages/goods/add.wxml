@@ -1,7 +1,7 @@
 <view id="panel" class="flex-column">
-
+ <form bindsubmit='submitForm'>
   <view class="flex-view-item">
-    <view class="flex-row" >
+    <view class="flex-row">
       <view class="flex-view-item">填写商品信息-></view>
       <view class="flex-view-item">拍照-></view>
       <view class="flex-view-item">提交-></view>
@@ -12,18 +12,22 @@
 
   <view class='line'></view>
   <view class="flex-view-item">
-      <view class="flex-row">
-        <text class='font'>标题</text>
+    <view class="flex-row">
+      <text class='font'>标题</text>
     </view>
     <view class="edit.cem">
-      <input name="name" value="{{goods.name}}" placeholder="例如：xx品牌 xx 商品" />
+      <input name="name" data-name="{{goods.name}}" placeholder="例如：xx品牌 xx 商品" />
     </view>
   </view>
 
   <view class="flex-view-item">
-  <label>照片</label>
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view class="picker">
+      分类：{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}
+    </view>
+  </picker>
     <view class="button.aa">
-      <button class="button.aa" id='1' data-name='list' bindtap='uploadImages' plain='true'>条码</button>
+      <button class="button.aa" id='1' data-name='codes' bindtap='uploadImages' plain='true'>条码</button>
     </view>
   </view>
 
@@ -43,7 +47,7 @@
       </view>
     </view>
     <view class="button.aa">
-      <button class='button' id='1' data-name='list' bindtap='uploadImages' plain='true'>照片</button>
+      <button class='button' id='1' data-name='pics' bindtap='uploadImages' plain='true'>照片</button>
     </view>
 
   </view>
@@ -78,5 +82,5 @@
     <contact-button type="default-light" size="20" session-from="weapp">
     </contact-button>
   </view>
-
+</form>
 </view>

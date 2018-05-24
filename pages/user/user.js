@@ -1,19 +1,12 @@
 // pages/new-pages/user/user.js
+var util = require('../../utils/util.js')
+var config = require('../../config/config.js')
+var api = require('../../config/api.config.js')
 //获取应用实例
 const app = getApp()
 
 Page({
   data: {
-    thumb: '',
-    nickname: '',
-    status: 0,
-    orders: [],
-    hasAddress: false,
-    address: {},
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   onLoad() {
 
@@ -23,27 +16,27 @@ Page({
     console.log(Obj.openid);
     var openid = Obj.openid;
 
-      wx.request({
-        method: 'GET',
-        url: 'https://www.donghl.cn/api/v1/apply',
-        data: { openid },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          console.log('----------------------------------------------------')
-          console.log(res.data) //获取openid  
-          self.setData({
-            status: res.data.data.rows[0].status
-          })
-        }
-      })
+    wx.request({
+      method: 'GET',
+      url: api.applyApi.url,//'https://www.donghl.cn/api/v1/apply',
+      data: { openid },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log('----------------------------------------------------')
+        console.log(res.data) //获取openid  
+        self.setData({
+          status: res.data.data.rows[0].status
+        })
+      }
+    })
 
     /**
      * 发起请求获取订单列表信息
      */
     wx.request({
-      url: 'https://www.donghl.cn/api/v1/order',
+      url: api.orderApi.url,//'https://www.donghl.cn/api/v1/order',
       success(res) {
         self.setData({
           // orders: res.data
@@ -53,19 +46,6 @@ Page({
   },
   onShow() {
     var self = this;
-    /**
-     * 获取本地缓存 地址信息
-     */
-    wx.getStorage({
-      key: 'address',
-      success: function (res) {
-        self.setData({
-          hasAddress: true,
-          address: res.data
-        })
-      }
-    })
-
     console.log(this.data)
   },
   /**
@@ -94,6 +74,24 @@ Page({
 
   },
 
+  getAddress: function () {
+    let self = this;
+    wx.chooseAddress({
+      success: function (res) {
+        console.log(res.userName)
+        console.log(res.postalCode)
+        console.log(res.provinceName)
+        console.log(res.cityName)
+        console.log(res.countyName)
+        console.log(res.detailInfo)
+        console.log(res.nationalCode)
+        console.log(res.telNumber)
+        self.setData({
+          address: res
+        })
+      }
+    })
+  },
   getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -101,6 +99,12 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  getSystemInfo: function (e) {
+    wx.getSystemInfo({
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
   }
-
 })
