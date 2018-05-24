@@ -14,7 +14,7 @@ Page({
       console.log('onLoad')
         var self = this;
       wx.request({
-        url: api.loginApi.url,//'https://www.donghl.cn/api/v1/login',
+        url: api.loginApi.url,
         method: "POST",
         data: { "username": "aaa", "password": "12345678" },
         success(res) {
@@ -32,7 +32,7 @@ Page({
       let cookie = wx.getStorageSync('cookie');
       var self = this;
       wx.request({
-        url: api.categoryApi.url,//'https://www.donghl.cn/api/v1/category',
+        url: api.categoryApi.url,
         // url:'https://www.easy-mock.com/mock/5ad6cd85baad39136d1d293d/api/api/v1/category',
         success(res) {
           console.log(res)
@@ -41,20 +41,6 @@ Page({
           })
         }
       })
-
-      // let cookie = wx.getStorageSync('cookie');
-      // console.log(cookie)
-      // var self = this;
-      // wx.request({
-      //   url: 'https://www.donghl.cn/api/v1/acl',
-      //   method: "GET",
-      //   data: { name: '果味', id: 'guowei',pic:'p1.jpg' },
-      //   success(res) {
-      //     self.setData({
-      //       //detail: res.data.data
-      //     })
-      //   }
-      // });
     },
 
     onReady(){

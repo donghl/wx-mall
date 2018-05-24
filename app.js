@@ -1,5 +1,5 @@
-var config=require('./config/config.js')
-var api =require('./config/api.config.js')
+var config = require('./config/config.js')
+var api = require('./config/api.config.js')
 
 App({
   onLaunch: function () {
@@ -14,7 +14,7 @@ App({
         console.log('--------------- App Launch----------------111')
         console.log(res);
       },
-      fail:res=>{
+      fail: res => {
         console.log(res);
         console.log('--------------- App Launch----------------222')
       }
@@ -59,7 +59,7 @@ App({
 
           wx.request({
             method: 'GET',
-            url: api.wxApi.url,//'https://www.donghl.cn/api/v1/wx',
+            url: api.wxApi.url,
             data: { code, appid, secret },
             header: {
               'content-type': 'application/json'

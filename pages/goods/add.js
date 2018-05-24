@@ -183,7 +183,7 @@ Page({
         var uploadImgCount = 0;
         for (var i = 0, h = tempFilePaths.length; i < h; i++) {
           const uploadTask = wx.uploadFile({
-            url: 'https://www.donghl.cn/upload-multi', //图片插入接口，此处为单个文件处理，多个文件则用循环处理 
+            url: api.upload-multi.url,// , //图片插入接口，此处为单个文件处理，多个文件则用循环处理 
             filePath: tempFilePaths[i],
             name: 'myfile',
             formData: {
@@ -241,7 +241,7 @@ Page({
     // wx.setStorageSync('zone', that.data.zone)
 
     wx.request({
-      url: 'https://www.donghl.cn/api/v1/goods',
+      url: api.goodsApi.url,
       method: "PUT",
       data: {
         key: { 'uuid': that.data.uuid },

@@ -1,21 +1,13 @@
 // pages/apply/apply.js
 var config = require('../../config/config.js')
 var api = require('../../config/api.config.js')
-Page({
 
+Page({
   /**
    * 页面的初始数据
    */
   data: {
   },
-
-  // bindPickerChange: function (e) {
-  //   console.log('picker发送选择改变，携带值为', e.detail.value)
-  //   this.setData({
-  //     zone: e.detail.value
-  //   })
-  // },
-
   // 点击下拉显示框
   selectTap() {
     this.setData({
@@ -36,16 +28,16 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var Obj = wx.getStorageSync('Obj') || []
+    var user = wx.getStorageSync('user') || []
     var name = wx.getStorageSync('name') || []
     var card = wx.getStorageSync('card') || []
 
-    console.log(Obj)
+    console.log(user)
     this.setData({
-      obj: Obj,
-      openid: Obj.openid,
-      name:name,
-      card:card,
+      user: user,
+      // openid: user.openid,
+      // name:name,
+      // card:card,
       zone: wx.getStorageSync('zone') || []
     })
 
@@ -53,11 +45,11 @@ Page({
     /**
   * 发起请求获取订单列表信息
   */
-    var openid = Obj.openid;
+    var openid = user.openid;
 
     wx.request({
       method: 'GET',
-      url: api.applyApi.url,  //'https://www.donghl.cn/api/v1/apply',
+      url: api.applyApi.url,  
       data: { openid },
       header: {
         'content-type': 'application/json'
@@ -136,8 +128,8 @@ Page({
       progress: 0
     })
 
-    var Obj = wx.getStorageSync('Obj') || []
-    console.log(Obj)
+    var user = wx.getStorageSync('user') || []
+    console.log(user)
 
     wx.chooseImage({
       count: 9, // 默认9
@@ -154,13 +146,13 @@ Page({
         var uploadImgCount = 0;
         for (var i = 0, h = tempFilePaths.length; i < h; i++) {
           const uploadTask = wx.uploadFile({
-            url: 'https://www.donghl.cn/upload-single', //图片插入接口，此处为单个文件处理，多个文件则用循环处理 
+            url: api.singleUpload.url,//'https://www.donghl.cn/upload-single', //图片插入接口，此处为单个文件处理，多个文件则用循环处理 
             filePath: tempFilePaths[i],
             name: 'myfile',
             formData: {
               'subpath': 'apply',
               'collection': 'apply',
-              'openid': Obj.openid,
+              'openid': user.openid,
               'arr': 'pics',
               'key': e.target.dataset.name   //图片在数组里面的索引
             },
@@ -217,7 +209,7 @@ Page({
     // wx.setStorageSync('zone', that.data.zone)
     
     wx.request({
-      url: 'https://www.donghl.cn/api/v1/apply',
+      url: api.applyApi.url,//
       method: "PUT",
       data: { key:{ 'openid':that.data.openid},
         value: { "name": that.data.name, "card": that.data.card, 'zone': wx.getStorageSync('zone'), 'status':1} },

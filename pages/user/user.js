@@ -18,7 +18,7 @@ Page({
 
     wx.request({
       method: 'GET',
-      url: api.applyApi.url,//'https://www.donghl.cn/api/v1/apply',
+      url: api.applyApi.url, 
       data: { openid },
       header: {
         'content-type': 'application/json'
@@ -36,7 +36,7 @@ Page({
      * 发起请求获取订单列表信息
      */
     wx.request({
-      url: api.orderApi.url,//'https://www.donghl.cn/api/v1/order',
+      url: api.orderApi.url,
       success(res) {
         self.setData({
           // orders: res.data
@@ -89,6 +89,7 @@ Page({
         self.setData({
           address: res
         })
+        wx.setStorageSync('address', res)
       }
     })
   },
