@@ -9,8 +9,6 @@
     background: #AB956D;
     color: #fff;
 }
-
-
 .header .thumb{
     position: absolute;
     left: 30rpx;
@@ -19,7 +17,6 @@
     height: 100rpx;
     border-radius: 50%;
 }
-
 .header.about{
     float: right;
 }

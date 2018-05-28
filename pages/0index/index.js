@@ -1,6 +1,5 @@
 // 引入SDK核心类
 var util = require('../../utils/util.js')
-
 var QQMapWX = require('../../lib/qqmap/qqmap-wx-jssdk.js');
 //获取应用实例
 var app = getApp()
@@ -28,26 +27,7 @@ Page({
 
 
   onLoad: function () {
-
     var that = this
-    // 查看是否授权
-    wx.getSetting({
-      success: function (res) {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-          wx.getUserInfo({
-            success: function (res) {
-              console.log(res.userInfo)
-            }
-          })
-        }
-      }
-    })
-
-
-
-
-
     wx.getLocation({
       // type: 'gcj02',
       success: function (res) {
@@ -95,7 +75,4 @@ Page({
     })
 
   },
-  bindGetUserInfo: function (e) {
-    console.log(e.detail.userInfo)
-  }
 })

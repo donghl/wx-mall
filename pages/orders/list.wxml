@@ -1,2 +1,26 @@
 <!--pages/orders/list.wxml-->
-<text>pages/orders/list.wxml</text>
+<scroll-view scroll-x="true" class="tab-orders" scroll-left="{{scrollLeft}}">
+  <view class="tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="swichNav">全部</view>
+  <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">待付款</view>
+  <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">待发货</view>
+  <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">待收货</view>
+  <view class="tab-item {{currentTab==4?'active':''}}" data-current="4" bindtap="swichNav">待评价</view>
+</scroll-view>
+
+
+<view class="orders-box">
+  <view class="orders">订单详情</view>
+  <!-- <view class="orders-list" wx:for="{{orders}}" wx:key="index">
+      <view class="orders-number">订单编号：{{item.number}}</view>
+      <view class="orders-detail">
+        <image src="{{item.thumb}}"></image>
+        <view class="">{{item.name}}</view>
+        <view class="">{{item.count}}</view>
+        <text class="orders-status">{{item.status}}</text>
+      </view>
+      <view class="orders-footer">
+        <text>实付：￥{{item.money}}</text>
+        <button size="mini" class="orders-btn" bindtap="payOrders">付款</button>
+      </view>
+    </view> -->
+</view>

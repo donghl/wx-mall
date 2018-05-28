@@ -2,17 +2,21 @@
 /**
  * 物品的详细信息
  */
+
+//获取应用实例
+const app = getApp()
+
 Page({
   data:{
     goods: {
-      id: 1,
-      image: '/image/goods1.png',
-      title: '',
-      price: 0.01,
-      stock: '有货', 
-      detail: '这里是详情。',
-      parameter: '125g/个',  //规格参数
-      service: '不支持退货'
+      // id: 1,
+      // image: '/image/goods1.png',
+      // title: '',
+      // price: 0.01,
+      // stock: '有货', 
+      // detail: '这里是详情。',
+      // parameter: '125g/个',  //规格参数
+      // service: '不支持退货'
     },
     num: 1,
     totalNum: 0,
@@ -21,7 +25,9 @@ Page({
     show: false,
     scaleCart: false
   },
+  onLoad(){
 
+  },
   addCount() {
     let num = this.data.num;
     num++;
@@ -30,10 +36,15 @@ Page({
     })
   },
 
-  addToCart() {
+  addToCart(e) {
+    console.log(e)
     const self = this;
     const num = this.data.num;
     let total = this.data.totalNum;
+    const carts = app.globalData.cardList; // 获取购物车列表
+    e.currentTarget.dataset.obj.num = 1;
+    carts.push(e.currentTarget.dataset.obj);
+    console.log(carts);
 
     self.setData({
       show: true

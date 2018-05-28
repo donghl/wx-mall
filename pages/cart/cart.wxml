@@ -1,5 +1,5 @@
 <view class="main">
-  <view wx:if="{{hasList}}">
+  <view wx:if="{{carts}}>0">
     <view class="cart-box">
       <view class="cart-list" wx:for="{{carts}}" wx:key="{{index}}">
         <icon wx:if="{{item.selected}}" type="success" color="red" data-index="{{index}}" class="cart-pro-select" bindtap="selectList" />

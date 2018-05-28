@@ -7,6 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    toast1Hidden: true,
+    modalHidden: true,
+    modalHidden2: true,  
   },
   // 点击下拉显示框
   selectTap() {
@@ -35,7 +38,7 @@ Page({
     console.log(user)
     this.setData({
       user: user,
-      // openid: user.openid,
+      openid: user.openid,
       // name:name,
       // card:card,
       zone: wx.getStorageSync('zone') || []
