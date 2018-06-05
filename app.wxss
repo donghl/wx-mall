@@ -34,10 +34,8 @@
 }
 
 
-page {
-  /* background-color: #fbf9fe; */
-  background-color: antiquewhite;
-  height: 100%;
+.main{
+    height: 100%;
 }
 .container {
   display: flex;
@@ -99,7 +97,6 @@ page {
   margin-bottom: 100rpx;
 }
 .page-body-form {
-  width: 100%;
   background-color: #fff;
   display: flex;
   flex-direction: column;

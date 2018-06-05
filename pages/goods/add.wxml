@@ -1,86 +1,84 @@
 <view id="panel" class="flex-column">
- <form bindsubmit='submitForm'>
-  <view class="flex-view-item">
-    <view class="flex-row">
-      <view class="flex-view-item">填写商品信息-></view>
-      <view class="flex-view-item">拍照-></view>
-      <view class="flex-view-item">提交-></view>
-      <view class="flex-view-item">审核-></view>
-      <view class="flex-view-item">发布</view>
-    </view>
-  </view>
-
-  <view class='line'></view>
-  <view class="flex-view-item">
-    <view class="flex-row">
-      <text class='font'>标题</text>
-    </view>
-    <view class="edit.cem">
-      <input name="name" data-name="{{goods.name}}" placeholder="例如：xx品牌 xx 商品" />
-    </view>
-  </view>
-
-  <view class="flex-view-item">
-  <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
-    <view class="picker">
-      分类：{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}
-    </view>
-  </picker>
-    <view class="button.aa">
-      <button class="button.aa" id='1' data-name='codes' bindtap='uploadImages' plain='true'>条码</button>
-    </view>
-  </view>
-
-
-  <view class="flex-view-item">
+  <form bindsubmit='submitForm' bindreset='reset'>
     <view class="flex-view-item">
       <view class="flex-row">
-        <text class='font'>详细信息</text>
+        <view class="flex-view-item">填写商品信息-></view>
+        <view class="flex-view-item">拍照-></view>
+        <view class="flex-view-item">提交-></view>
+        <view class="flex-view-item">审核-></view>
+        <view class="flex-view-item">发布</view>
       </view>
     </view>
-    <view class="section">
-      <textarea bindblur="bindTextAreaBlur" auto-height placeholder="例如：x种颜色可选" />
-    </view>
-    <view class="right imgs">
-      <view class="img" wx:for="{{item.info_file}}" wx:for-item="img" wx:key="img" id="img" bindtap='previewImg' id="img" data-imgs='{{item.info_file}}' data-currentimg="{{img}}">
-        <image src="{{server_host}}{{img}}"></image>
+
+    <view class='line'></view>
+    <view class="flex-view-item">
+      <view class="flex-row">
+        <text class='font'>标题</text>
+      </view>
+      <view class="edit.cem">
+        <input name="name" data-name="{{goods.name}}" placeholder="例如：xx品牌 xx 商品" />
       </view>
     </view>
-    <view class="button.aa">
-      <button class='button' id='1' data-name='pics' bindtap='uploadImages' plain='true'>照片</button>
+
+    <view class="flex-view-item">
+      <picker mode="multiSelector" name='type' bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+        <view class="picker">
+          分类：{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}
+        </view>
+      </picker>
+      <view class="button.aa">
+        <button class="button.aa" id='1' data-name='codes' bindtap='chooseImage' plain='true'>条码</button>
+      </view>
     </view>
 
-  </view>
 
-  <view class="flex-row" style="display: flex;flex-direction: row;justify-content:space-between">
     <view class="flex-view-item">
-      <label>单买价</label>
+      <view class="flex-view-item">
+        <view class="flex-row">
+          <text class='font'>详细信息</text>
+        </view>
+      </view>
+      <view class="section">
+        <textarea id='dd1' name='detail' data-detail="{{goods.detail}}" auto-height placeholder="例如：x种颜色可选" />
+      </view>
+      <view class="right imgs">
+        <view class="img" wx:for="{{item.info_file}}" wx:for-item="img" wx:key="img" id="img" bindtap='previewImg' id="img" data-imgs='{{item.info_file}}' data-currentimg="{{img}}">
+          <image src="{{server_host}}{{img}}"></image>
+        </view>
+      </view>
+      <view class="button.aa">
+        <button class='button' id='1' data-name='pics' bindtap='uploadImages' plain='true'>照片</button>
+      </view>
+
     </view>
-    <input class=''></input>
-    <view class="flex-view-item">
-      <label>团购价格</label>
+
+    <view class="flex-row" style="display: flex;flex-direction: row;justify-content:space-between">
+      <view class="flex-view-item">
+        <label>单买价</label>
+        <input name='p1' data-value='{{vv}}' type="digit" />
+      </view>
+      <view class="flex-view-item">
+        <label>团购价格</label>
+        <input name='p2' type="digit" />
+      </view>
     </view>
-    <view class="flex-view-item">
-      <input class=''></input>
+    <view class="flex-row" style="display: flex;flex-direction: row;justify-content:space-between">
+      <view class="flex-view-item">
+        <label>库存</label>
+      </view>
+      <view class="flex-view-item">
+        <input name='stock' type='number' />
+      </view>
     </view>
-  </view>
-  <view class="flex-row" style="display: flex;flex-direction: row;justify-content:space-between">
-    <view class="flex-view-item">
-      <label>库存</label>
-    </view>
-    <view class="flex-view-item">
-      <input class=''></input>
-    </view>
-  </view>
 
 
 
-  <view style="width:750rpx;height:250rpx;background-color:#ffff;">
-    <button class='button.submit' form-type='submit'>提交审核</button>
-  </view>
-  <view style="width:750rpx;height:250rpx;background-color:#ffff;">
-    <contact-button type="default-light" size="20" session-from="weapp">
-    </contact-button>
-  </view>
-</form>
+    <view style="background-color:#ffff;">
+      <button class='button.submit' form-type='submit'>提交审核</button>
+    </view>
+    <view style="width:750rpx;height:250rpx;background-color:#ffff;">
+      <contact-button type="default-light" size="20" session-from="weapp">
+      </contact-button>
+    </view>
+  </form>
 </view>

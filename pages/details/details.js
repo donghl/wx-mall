@@ -25,8 +25,9 @@ Page({
     show: false,
     scaleCart: false
   },
-  onLoad(){
-
+  onLoad(e){
+    console.log('### ----------detail  onload ---------------------- ')
+    console.log(e)
   },
   addCount() {
     let num = this.data.num;

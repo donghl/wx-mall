@@ -1,8 +1,8 @@
 /* @import '../common/common.wxss'; */
 
-page,.main{
-    height: 100%;
-}
+/* page, */
+
+
 .categroy-left{
     float: left;
     width: 150rpx;
@@ -72,8 +72,8 @@ page,.main{
     margin:0 20rpx 20rpx 0;
 }
 .product-list image{
-    width: 80rpx;
-    height: 80rpx;
+    width: 180rpx;
+    height: 180rpx;
     margin-bottom: 20rpx;
 }
 .product-list:nth-child(3n){

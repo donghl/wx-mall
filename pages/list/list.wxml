@@ -5,7 +5,7 @@
 
     <view class="list-box">
         <view class="newest-list">
-            <navigator url="../details/details?id=123">
+            <navigator url="../details/details?id=123&name=ok">
                 <image src="/image/s4.png"></image>
                 <view class="newest-text"><text>瓜子 100g</text></view>
                 <view class="newest-text"><text>￥ 0.01</text></view>

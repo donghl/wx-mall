@@ -1,15 +1,27 @@
 // var uuid = require('../../lib/node-uuid/uuid.modified.js');
 var uuid = require('../../lib/uuid/we-uuidv4');
-var config = require('../../config/config.js')
+var util = require('../../utils/util.js')
+// var config = require('../../config/config.js')
 var api = require('../../config/api.config.js')
+import { promisify } from '../../utils/promise.util'
+import { $init, $digest } from '../../utils/common.util'
+import { createQuestion } from '../../services/question.service'
+import config from '../../config/config'
+
 
 Page({
   /**
    * 页面的初始数据
    */
   data: {
+    titleCount: 0,
+    contentCount: 0,
+    title: '',
+    content: '',
+    images: [],
+    // category: wx.getStorageSync('category'),
     multiIndex: [0, 0],
-    multiArray: [['美妆/洗护', '手表/饰品', '服装', '箱包', '鞋子'], ['尿裤湿巾', '喂养用品', '洗护用品', '玩具乐器', '服饰']],
+    multiArray: [[], []],
     uuid: null,
     date: null
   },
@@ -22,8 +34,22 @@ Page({
     console.log('add ------onload -----')
     var myDate = new Date();
     console.log(myDate);
+    var category = wx.getStorageSync('category');
+    console.log(category);
+    var arr = [[], []];
+    for (var i = 0; i < category.length; i++) {
+      arr[0][i] = category[i].name;
+    }
+    for (var i = 0; i < category[0].sub.length; i++) {
+      arr[1][i] = category[0].sub[i]
+    }
+    console.log('onLoad-------------- arr  -------------- ')
+    console.log(arr);
+
     this.setData({
+      category: wx.getStorageSync('category'),
       uuid: uuid(),
+      multiArray:arr,
       date: myDate
     })
   },
@@ -60,17 +86,19 @@ Page({
 
   },
 
-
   bindMultiPickerChange: function (e) {
     console.log('-------------bindMultiPickerChange-----------------------')
+
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       multiIndex: e.detail.value
     })
   },
   bindMultiPickerColumnChange: function (e) {
+    let self = this;
     console.log('----------------bindMultiPickerColumnChange--------------------1')
     console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+
     var data = {
       multiArray: this.data.multiArray,
       multiIndex: this.data.multiIndex
@@ -82,57 +110,42 @@ Page({
       case 0:
         switch (data.multiIndex[0]) {
           case 0:
-            data.multiArray[1] = ['尿裤湿巾', '喂养用品', '洗护用品', '玩具乐器', '服饰'];
-            // data.multiArray[2] = ['纸尿裤', '拉拉裤', '婴儿湿巾'];
+            data.multiArray[1] = self.data.category[0].sub;
             break;
           case 1:
-            data.multiArray[1] = ['欧美表', '日韩表', '时尚表', '饰品'];
-            // data.multiArray[2] = ['雷朋', '古驰'];
+            data.multiArray[1] = self.data.category[1].sub;
+            break;
+          case 2:
+            data.multiArray[1] = self.data.category[2].sub;
+            break;
+          case 3:
+            data.multiArray[1] = self.data.category[3].sub;
+            break;
+          case 4:
+            data.multiArray[1] = self.data.category[4].sub;
             break;
         }
-        data.multiIndex[1] = 0;
-        data.multiIndex[2] = 0;
+        // data.multiIndex[1] = 0;
+        // data.multiIndex[2] = 0;
         break;
-        // case 1:
-        //   switch (data.multiIndex[0]) {
-        //     case 0:
-        //       switch (data.multiIndex[1]) {
-        //         case 0:
-        //           data.multiArray[2] = ['纸尿裤', '拉拉裤', '婴儿湿巾'];
-        //           break;
-        //         case 1:
-        //           data.multiArray[2] = ['蛔虫'];
-        //           break;
-        //         case 2:
-        //           data.multiArray[2] = ['蚂蚁', '蚂蟥'];
-        //           break;
-        //         case 3:
-        //           data.multiArray[2] = ['河蚌', '蜗牛', '蛞蝓'];
-        //           break;
-        //         case 4:
-        //           data.multiArray[2] = ['昆虫', '甲壳动物', '蛛形动物', '多足动物'];
-        //           break;
-        //       }
-        //       break;
-        //     case 1:
-        //       switch (data.multiIndex[1]) {
-        //         case 0:
-        //           data.multiArray[2] = ['鲫鱼', '带鱼'];
-        //           break;
-        //         case 1:
-        //           data.multiArray[2] = ['青蛙', '娃娃鱼'];
-        //           break;
-        //         case 2:
-        //           data.multiArray[2] = ['蜥蜴', '龟', '壁虎'];
-        //           break;
-        //       }
-        //       break;
-        //   }
-        data.multiIndex[2] = 0;
-        console.log(data.multiIndex);
+      case 1:
+        // switch (data.multiIndex[1]) {
+        //   case 0:
+        //     data.multiArray[2] = ['鲫鱼', '带鱼'];
+        //     break;
+        //   case 1:
+        //     data.multiArray[2] = ['青蛙', '娃娃鱼'];
+        //     break;
+        //   case 2:
+        //     data.multiArray[2] = ['蜥蜴', '龟', '壁虎'];
+        //     break;
+        // }
+        // data.multiIndex[1] = 0;
         break;
     }
+ 
     this.setData(data);
+    console.log(this.data)
   },
 
   /**
@@ -155,7 +168,25 @@ Page({
   onShareAppMessage: function () {
 
   },
-
+  bindTextAreaBlur: function (e) {
+    console.log(e)
+  },
+  bindP1Blur: function (e) {
+    console.log(e)
+  },
+  chooseImage(e){
+    console.log('==================chooseImage===========================')
+    wx.chooseImage({
+      count: 3,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success: res => {
+        const images = this.data.images.concat(res.tempFilePaths)
+        this.data.images = images.length <= 3 ? images : images.slice(0, 3)
+        $digest(this)
+      }
+    })
+  },
   uploadImages: function (e) {
     console.log('==================uploadImages===========================')
     var that = this;
@@ -165,8 +196,8 @@ Page({
       progress: 0
     })
 
-    var Obj = wx.getStorageSync('Obj') || []
-    console.log(Obj)
+    var cookie = wx.getStorageSync('cookie') || []
+    console.log(cookie)
     wx.chooseImage({
       count: 9, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -183,14 +214,14 @@ Page({
         var uploadImgCount = 0;
         for (var i = 0, h = tempFilePaths.length; i < h; i++) {
           const uploadTask = wx.uploadFile({
-            url: api.upload-multi.url,// , //图片插入接口，此处为单个文件处理，多个文件则用循环处理 
+            url: api.multiUpload.url,// , //图片插入接口，此处为单个文件处理，多个文件则用循环处理 
             filePath: tempFilePaths[i],
             name: 'myfile',
             formData: {
               'subpath': 'goods',
               'collection': 'goods',
               'uuid': that.data.uuid,
-              'openid': Obj.openid,
+              'openid': cookie.openid,
               'arr': arr,
               'key': i   //图片在数组里面的索引
             },
@@ -224,7 +255,6 @@ Page({
             console.log('已经上传的数据长度', res.totalBytesSent)
             console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
           })
-
         }
       }
     })
@@ -232,33 +262,52 @@ Page({
 
   submitForm: function (e) {
     var that = this;
-    console.log(e.detail)
+    var user = wx.getStorageSync('cookie') || [];
 
-    let name, card, zone;
-
-    var Obj = wx.getStorageSync('Obj');
+    var key = { 'openid': user.openid };
+    var zone = wx.getStorageSync('zone') || [];
+    console.log(e)
+    var data = Object.assign(key, e.detail.value, zone,{status:0});// key.extend(e.detail.value)
+    console.log(data)
 
     // wx.setStorageSync('zone', that.data.zone)
+    var url = '/api/v1/goods';
 
-    wx.request({
-      url: api.goodsApi.url,
-      method: "PUT",
-      data: {
-        key: { 'uuid': that.data.uuid },
-        value: { "name": that.data.name, 
-        'openid':Obj.openid,
-        'zone': wx.getStorageSync('zone'), 
-        'status': 0 }
-      },
-      success(res) {
-
-        console.log(res.header)
-        //保存Cookie到Storage
-        if (res && res.header && res.header['set-cookie']) {
-          wx.setStorageSync('cookie', res.header['set-cookie'])
-        }
+    util.http('POST', url, data, (res) => {
+      console.log(res)
+      if (res.result != 0) {
+        wx.showToast({
+          title: '失败',
+          icon: 'none',
+          duration: 1000
+        })
+      } else {
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 1000
+        })
       }
-    });
+    })
+
+    // wx.request({
+    //   url: api.goodsApi.url,
+    //   method: "PUT",
+    //   data: {
+    //     key: { 'uuid': that.data.uuid },
+    //     value: { "name": that.data.name, 
+    //     'openid':user.openid,
+    //     'zone': wx.getStorageSync('zone'), 
+    //     'status': 0 }
+    //   },
+    //   success(res) {
+    //     console.log(res.header)
+    //     //保存Cookie到Storage
+    //     if (res && res.header && res.header['set-cookie']) {
+    //       wx.setStorageSync('cookie', res.header['set-cookie'])
+    //     }
+    //   }
+    // });
 
   }
 

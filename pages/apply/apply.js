@@ -31,9 +31,9 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var user = wx.getStorageSync('user') || []
-    var name = wx.getStorageSync('name') || []
-    var card = wx.getStorageSync('card') || []
+    var user = wx.getStorageSync('cookie') || []
+    // var name = wx.getStorageSync('name') || []
+    // var card = wx.getStorageSync('card') || []
 
     console.log(user)
     this.setData({
@@ -131,7 +131,7 @@ Page({
       progress: 0
     })
 
-    var user = wx.getStorageSync('user') || []
+    var user = wx.getStorageSync('cookie') || []
     console.log(user)
 
     wx.chooseImage({

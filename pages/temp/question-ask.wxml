@@ -1,34 +1,34 @@
-<view class="goods-form">
+<view class="question-form">
 
-  <view class="goods-input-area">
+  <view class="question-input-area">
 
     <!-- 问题标题  -->
-    <view class="goods-title-wrap">
-      <input class="goods-title" placeholder="请输入标题" maxlength="10" placeholder-style="color:#b3b3b3;font-size:18px;" bindinput="handleTitleInput"></input>
-      <view class="title-input-counter">{{titleCount}}/10</view>
+    <view class="question-title-wrap">
+      <input class="question-title" placeholder="请输入标题" maxlength="40" placeholder-style="color:#b3b3b3;font-size:18px;" bindinput="handleTitleInput"></input>
+      <view class="title-input-counter">{{titleCount}}/40</view>
     </view>
 
     <!-- 问题正文  -->
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <textarea class="weui-textarea" placeholder="请输入描述信息。" maxlength="100" placeholder-style="color:#b3b3b3;font-size:14px;" style="height: 8rem" bindinput="handleContentInput" />
-          <view class="weui-textarea-counter">{{contentCount}}/100</view>
+          <textarea class="weui-textarea" placeholder="请输入问题的正文内容。" maxlength="500" placeholder-style="color:#b3b3b3;font-size:14px;" style="height: 12rem" bindinput="handleContentInput" />
+          <view class="weui-textarea-counter">{{contentCount}}/500</view>
         </view>
       </view>
     </view>
 
   </view>
 
-  <view class="goods-images-area">
+  <view class="question-images-area">
 
     <!-- 添加图片按钮  -->
-    <view class="goods-images-tool">
+    <view class="question-images-tool">
       <button type="default" size="mini" bindtap="chooseImage" wx:if="{{images.length < 10}}">添加图片</button>
     </view>
 
     <!-- 图片缩略图  -->
-    <view class="goods-images">
+    <view class="question-images">
       <block wx:for="{{images}}" wx:key="*this">
         <view class="q-image-wrap">
           <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>

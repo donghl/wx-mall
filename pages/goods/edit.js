@@ -1,18 +1,27 @@
 // pages/goods/edit.js
+import { promisify } from '../../utils/promise.util'
+import { $init, $digest } from '../../utils/common.util'
+import { createQuestion } from '../../services/question.service'
+import config from '../../config/config'
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    titleCount: 0,
+    contentCount: 0,
+    title: '',
+    content: '',
+    images: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-  
+  onLoad(options) {
+    $init(this)
   },
 
   /**
@@ -62,5 +71,19 @@ Page({
    */
   onShareAppMessage: function () {
   
-  }
+  },
+
+  handleTitleInput(e) {
+    const value = e.detail.value
+    this.data.title = value
+    this.data.titleCount = value.length
+    $digest(this)
+  },
+
+  handleContentInput(e) {
+    const value = e.detail.value
+    this.data.content = value
+    this.data.contentCount = value.length
+    $digest(this)
+  },
 })

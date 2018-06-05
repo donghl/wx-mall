@@ -1,1 +1,2 @@
-/* pages/goods/edit.wxss */
+ @import './goods.wxss'; 
+ 

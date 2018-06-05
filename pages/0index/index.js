@@ -1,6 +1,6 @@
 // 引入SDK核心类
 var util = require('../../utils/util.js')
-var QQMapWX = require('../../lib/qqmap/qqmap-wx-jssdk.js');
+
 //获取应用实例
 var app = getApp()
 
@@ -24,55 +24,36 @@ Page({
     console.log(res.scrollTop);
   },
 
+  onShow:function(){
+    console.log('index-------------- onShow  -------------- ')
+    var userinfo = util.getUserInfo();
+    console.log(userinfo);
+    util.getLocation();
 
+  },
 
   onLoad: function () {
     var that = this
-    wx.getLocation({
-      // type: 'gcj02',
-      success: function (res) {
-        // var latitude = res.latitude
-        // var longitude = res.longitude
-        // var speed = res.speed
-        // var accuracy = res.accuracy
-        // var verticalAccuracy = res.verticalAccuracy
-
-        console.log(res.latitude)
-        console.log(res.longitude)
-        console.log(res.speed)
-        console.log(res.accuracy)
-        console.log(res.altitude)
-        console.log(res.verticalAccuracy)
-        console.log(res.horizontalAccuracy)
-
-        // 实例化API核心类
-        var demo = new QQMapWX({
-          key: 'FGDBZ-K63WG-TTQQQ-IPMD4-A4SBS-VIFY5' // 必填
-        });
-
-        // 调用接口
-        demo.reverseGeocoder({
-          location: {
-            latitude: res.latitude,
-            longitude: res.longitude
-          },
-          success: function (res) {
-            console.log('-------------- success -------------- ')
-            console.log(res);
-            console.log(res.result.address_component)
-            wx.setStorageSync('zone', res.result)
-          },
-          fail: function (res) {
-            console.log(res);
-          },
-          complete: function (res) {
-            console.log('-------------- complete -------------- ')
-            console.log(res);
-          }
-        });
-
-      }
+    //调用应用实例的方法获取全局数据
+    app.getUserInfo(function (userInfo) {
+      //更新数据
+      that.setData({
+        imageWidth: app.globalData.screenWidth,
+        imageHeight: app.globalData.screenHightScale * 650,
+        inputViewWidth: app.globalData.screenWidth,
+        inputViewHeight: app.globalData.screenHightScale * 88,
+        inputWidth: app.globalData.screenWidth,
+        inputHeight: app.globalData.screenHightScale * 177
+      })
     })
 
+   
+
   },
+  goList(e){
+    console.log(e);
+    wx.navigateTo({
+      url: '../../pages/list/list?type=' + e.currentTarget.dataset.type + '&category=' + e.currentTarget.dataset.category,
+    })
+  }
 })

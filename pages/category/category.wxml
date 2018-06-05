@@ -14,7 +14,7 @@
         </view>
         <view class="product">
           <view class="product-list">
-            <navigator url="../details/details">
+            <navigator url="../details/details?id=122222222">
               <image src="/image/c0.png"></image>
               <view class="classname">
                 <text>{{toView}}</text>
@@ -36,7 +36,7 @@
         </view>
         <view class="product">
           <view class="product-list">
-            <navigator url="../details/details">
+            <navigator url="../details/details?id=123">
               <image src="/image/c1.png"></image>
               <view class="classname">
                 <text>{{toView}}</text>

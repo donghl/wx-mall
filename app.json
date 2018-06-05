@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/0index/index",
+    "pages/temp/index",
+    "pages/temp/test",
+    "pages/temp/question-ask",
     "pages/category/category",
     "pages/cart/cart",
     "pages/list/list",
@@ -34,6 +37,12 @@
         "text": "主页"
       },
       {
+        "pagePath": "pages/temp/question-ask",
+        "iconPath": "image/button/22.png",
+        "selectedIconPath": "image/button/21.png",
+        "text": "TEST"
+      },
+      {
         "pagePath": "pages/category/category",
         "iconPath": "image/button/22.png",
         "selectedIconPath": "image/button/21.png",
@@ -59,5 +68,5 @@
     "uploadFile": 10000,
     "downloadFile": 10000
   },
-  "debug": false
+  "debug": true
 }

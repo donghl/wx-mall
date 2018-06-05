@@ -1,0 +1,5 @@
+/* pages/temp/index.wxss */
+
+.img{
+  width: 100%;
+}

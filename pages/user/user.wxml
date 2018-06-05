@@ -2,9 +2,8 @@
   <view class="header">
     <open-data class='thumb' type="userAvatarUrl"></open-data>
     <open-data type="userNickName"></open-data>
-    <!-- 需要使用 button 来授权登录 -->
-    <!-- <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权</button>
-    <view wx:else>请升级微信版本</view> -->
+    <text class="center">{{nation}}{{province}}</text>
+
   </view>
 
   <view class="address-box">
@@ -12,9 +11,6 @@
       <navigator url="/pages/orders/list">我的订单</navigator>
     </view>
   </view>
-
-
-
   <view class="address-box">
     <view class="address-manage" bindtap='getAddress'>
       <text>收货地址</text>
@@ -35,7 +31,7 @@
   <view class="address-box" data-type="about" bindtap="getUserInfo">
     <view wx:if='{{status}}' class="address-manage">
       <!-- <view class="orders">申请成为导购</view> -->
-      <navigator url="/pages/goods/goods">管理货品</navigator>
+      <navigator url="/pages/goods/goods">导购管理</navigator>
     </view>
   </view>
   <!-- <view class="address-box" data-type="本机信息" bindtap="getSystemInfo">
@@ -43,11 +39,11 @@
       <text class="user-list-title">本机信息</text>
     </view>
   </view> -->
-  <view class="address-box" data-type="about" bindtap="getUserInfo">
+  <!-- <view class="address-box" data-type="about" bindtap="getUserInfo">
     <view class="address-manage">
       <text class="user-list-title">关于我们</text>
     </view>
-  </view>
+  </view> -->
 
 
   <view class="address-box">

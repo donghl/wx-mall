@@ -11,20 +11,14 @@
     <!-- view class="select-title"><text>精选主题</text></view -->
     <view class="select-top">
       <view class="select-top-small">
-        <navigator url="../list/list">
-          <image src="/image/s1.png"></image>
-        </navigator>
+          <image src="/image/s1.png" data-type='1' data-category='hot' bindtap='goList'></image>
       </view>
       <view class="select-top-small">
-        <navigator url="../list/list">
-          <image src="/image/s2.png"></image>
-        </navigator>
+          <image src="/image/s2.png" data-type='2' data-category='new' bindtap='goList'></image>
       </view>
     </view>
     <view class="select-bottom">
-      <navigator url="../list/list">
-        <image src="/image/s3.png"></image>
-      </navigator>
+        <image src="/image/s3.png" data-type='3' data-category='women'bindtap='goList'></image>
     </view>
   </view>
   <view>

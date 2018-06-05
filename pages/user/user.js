@@ -7,7 +7,8 @@ const app = getApp()
 
 Page({
   data: {
-
+    nation: null,    //国家
+    province: null,  //省/市
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
@@ -17,45 +18,14 @@ Page({
   onShow: function () {
     var self = this;
     console.log('----------------------onShow------------------------------')
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        console.log('--------------- getSetting  ---------------- success')
-        console.log(res)
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              console.log('---------------  getUserInfo  success--------------- ')
-              console.log(res)
-              // 可以将 res 发送给后台解码出 unionId
-              self.setData({
-                userInfo: res.userInfo
-              })
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            },
-            fail: res => {
-              console.log('---------------  getUserInfo  fail --------------- ')
-              console.log(res)
-            }
-          })
-        } else {
-
-        }
-
-      },
-      fail:res=>{
-        console.log('--------------- getSetting  ---------------- fail')
-        console.log(res)
-      }
-
+    var zone = wx.getStorageSync('zone') || []
+    console.log(zone)
+    self.setData({
+      nation: zone.address_component.nation,
+      province: zone.address_component.province,
     })
+    util.getUserInfo();
+    util.getLocation();
   },
 
   /**
@@ -72,7 +42,7 @@ Page({
 
     console.log('-----------------  onLoad success ----------------- ');
     var self = this;
-    var user = wx.getStorageSync('user') || []
+    var user = wx.getStorageSync('cookie') || []
     console.log(user.openid);
     var openid = user.openid;
 
@@ -107,10 +77,7 @@ Page({
       }
     })
   },
-  onShow() {
-    var self = this;
-    console.log(this.data)
-  },
+
   /**
    * 发起支付请求
    */
@@ -176,5 +143,9 @@ Page({
   bindGetUserInfo: function (e) {
     console.log('----------------------bindGetUserInfo------------------------------')
     console.log(e.detail.userInfo)
+    wx.setStorageSync('user', e.detail.userInfo)
+    this.setData({
+      userInfo: e.detail.userInfo,
+    })
   }
 })

@@ -1,0 +1,13 @@
+<view class="container">
+   <view>
+    <button type="default" bindtap="gotoShow">点击上传照片</button>
+  </view> 
+  <!-- <view>
+  <input class="input" name="card" value='{{card}}' bindinput='input' placeholder="请输入" placeholder-style="color: red" />
+  <label>输入结果：{{result}}</label> 
+  </view> -->
+   <view wx:for="{{srcList}}" data-code="{{item.code}}" wx:key="{{item.id}}">{{item}}
+    <image style="width: {{imagewidth}}px; height: {{imageheight}}px;" mode="aspectFitf" bindload="imageLoad" src="{{item}}"></image>
+  </view> 
+
+</view>
