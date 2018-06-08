@@ -2,7 +2,9 @@
 
 /* page, */
 
-
+page,.main{
+    height: 100%;
+}
 .categroy-left{
     float: left;
     width: 150rpx;
@@ -44,6 +46,7 @@
     padding:30rpx 0 55rpx;
     text-align: center;
     color: #AB956D;
+    font-size: 28rpx;
 }
 .cate-title::before{
     position: absolute;
@@ -70,10 +73,11 @@
     height: 160rpx;
     text-align: center;
     margin:0 20rpx 20rpx 0;
+    font-size: 24rpx;
 }
 .product-list image{
-    width: 180rpx;
-    height: 180rpx;
+    width: 80rpx;
+    height: 80rpx;
     margin-bottom: 20rpx;
 }
 .product-list:nth-child(3n){

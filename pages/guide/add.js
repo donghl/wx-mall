@@ -8,7 +8,6 @@ import { $init, $digest } from '../../utils/common.util'
 import { createQuestion } from '../../services/question.service'
 import config from '../../config/config'
 
-
 Page({
   /**
    * 页面的初始数据
@@ -38,7 +37,7 @@ Page({
     console.log(category);
     var arr = [[], []];
     for (var i = 0; i < category.length; i++) {
-      arr[0][i] = category[i].name;
+      arr[0][i] = category[i];
     }
     for (var i = 0; i < category[0].sub.length; i++) {
       arr[1][i] = category[0].sub[i]
@@ -89,7 +88,7 @@ Page({
   bindMultiPickerChange: function (e) {
     console.log('-------------bindMultiPickerChange-----------------------')
 
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+    console.log('bindMultiPickerChange 发送选择改变，携带值为', e.detail.value)
     this.setData({
       multiIndex: e.detail.value
     })
@@ -97,7 +96,7 @@ Page({
   bindMultiPickerColumnChange: function (e) {
     let self = this;
     console.log('----------------bindMultiPickerColumnChange--------------------1')
-    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+    console.log('bindMultiPickerColumnChange 修改的列为', e.detail.column, '，值为', e.detail.value);
 
     var data = {
       multiArray: this.data.multiArray,
@@ -108,6 +107,7 @@ Page({
     console.log(e.detail.column)
     switch (e.detail.column) {
       case 0:
+        console.log('----------------bindMultiPickerColumnChange--------------------3')
         switch (data.multiIndex[0]) {
           case 0:
             data.multiArray[1] = self.data.category[0].sub;
@@ -129,6 +129,7 @@ Page({
         // data.multiIndex[2] = 0;
         break;
       case 1:
+        console.log('----------------bindMultiPickerColumnChange--------------------4')
         // switch (data.multiIndex[1]) {
         //   case 0:
         //     data.multiArray[2] = ['鲫鱼', '带鱼'];
@@ -143,7 +144,7 @@ Page({
         // data.multiIndex[1] = 0;
         break;
     }
- 
+    console.log('----------------bindMultiPickerColumnChange--------------------5')
     this.setData(data);
     console.log(this.data)
   },
@@ -267,8 +268,22 @@ Page({
     var key = { 'openid': user.openid };
     var zone = wx.getStorageSync('zone') || [];
     console.log(e)
-    var data = Object.assign(key, e.detail.value, zone,{status:0});// key.extend(e.detail.value)
-    console.log(data)
+    var cc = e.detail.value.type;
+
+    console.log(cc);
+
+    var data = Object.assign(key, e.detail.value, 
+      // { category1: that.data.category[cc[0]].name},
+      // { category2: that.data.category[cc[0]].sub[cc[1]].name },
+    zone,{status:0});// key.extend(e.detail.value)
+    that.setData({
+      v1:that.data.category[cc[0]].name,
+      v2:that.data.category[cc[0]].sub[cc[1]].name
+    })
+    var v1 = that.data.category[cc[0]].name;
+    var v2 = that.data.category[cc[0]].sub[cc[1]].name;
+    data.type[0] = v1
+    data.type[1] = v2
 
     // wx.setStorageSync('zone', that.data.zone)
     var url = '/api/v1/goods';

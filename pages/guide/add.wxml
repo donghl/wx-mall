@@ -21,9 +21,9 @@
     </view>
 
     <view class="flex-view-item">
-      <picker mode="multiSelector" name='type' bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+      <picker mode="multiSelector" name='type' bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range-key="{{'name'}}" range="{{multiArray}}">
         <view class="picker">
-          分类：{{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}
+          分类：{{multiArray[0][multiIndex[0]].name}}，{{multiArray[1][multiIndex[1]].name}}
         </view>
       </picker>
       <view class="button.aa">

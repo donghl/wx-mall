@@ -1,3 +1,4 @@
+var util = require('../../utils/util.js')
 import { promisify } from '../../utils/promise.util'
 import { $init, $digest } from '../../utils/common.util'
 import { createQuestion } from '../../services/question.service'
@@ -16,6 +17,10 @@ Page({
   },
 
   onLoad(options) {
+    
+    this.setData({
+      date: util.formatTime(new Date())
+    })
     $init(this)
   },
 

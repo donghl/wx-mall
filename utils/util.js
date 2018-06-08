@@ -161,30 +161,30 @@ function getCategory() {
   let cc = wx.getStorageSync('category')
 
   console.log(cc);
-  if (cc == '') {
-    var url = api.categoryApi.url;
-    var data = {};
-    data.enable = true;
+  // if (cc == '') {
+  var url = api.categoryApi.url;
+  var data = {};
+  data.enable = true;
 
-    console.log(url);
-    console.log(data);
+  console.log(url);
+  console.log(data);
 
-    var header = "text/javascript";
+  var header = "text/javascript";
 
-    http('GET', url, data, (res) => {
-      if (res.errMsg) {
-        util.showModel(res.errMsg);
-        return null;
+  http('GET', url, data, (res) => {
+    if (res.errMsg) {
+      util.showModel(res.errMsg);
+      return null;
 
-      } else {
-        console.log(res)
-        wx.setStorageSync('category', res);
-        // self.setData({
-        //   category: res
-        // })
-      }
-    }, header)
-  } 
+    } else {
+      console.log(res)
+      wx.setStorageSync('category', res);
+      // self.setData({
+      //   category: res
+      // })
+    }
+  }, header)
+  // } 
 }
 function getUserInfo() {
   console.log('util --------------- getUserInfo  ---------------- ')
@@ -200,6 +200,7 @@ function getUserInfo() {
           success: res => {
             console.log('---------------  getUserInfo  success--------------- ')
             console.log(res)
+            wx.setStorageSync('user', res.userInfo)
             return res.userInfo;
             // app.globalData.userInfo = res.userInfo
 

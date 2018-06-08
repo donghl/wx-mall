@@ -1,0 +1,28 @@
+<view class="main">
+  <view class="banner">
+    <navigator url="../goods/edit?id=123">
+      <image src="/image/list1.png"></image>
+    </navigator>
+  </view>
+
+  <view class="group-list">
+    <!-- <view class="list-box">
+    <view class="newest-list"> -->
+    <block wx:for="{{goods}}" wx:key="index" wx:for-index="index">
+      <view class="box" bindtap="buyView">
+        <image src="{{item.img}}" style="width:369rpx;height:370rpx;" class="image"></image>
+        <view class="title">
+          <text>{{item.name}}</text>
+        </view>
+        <view class="price">
+          <text>￥{{item.price}}</text>
+          <text class="num">销量：{{item.sell}}</text>
+        </view>
+      </view>
+    </block>
+    <!-- </view> -->
+  </view>
+  <navigator url="../goods/add">
+    <button class='.circle-float'>┼</button>
+  </navigator>
+</view>

@@ -1,4 +1,4 @@
-// pages/new-pages/user/user.js
+// pages/new-pages/cookie/cookie.js
 var util = require('../../utils/util.js')
 var config = require('../../config/config.js')
 var api = require('../../config/api.config.js')
@@ -17,15 +17,18 @@ Page({
  */
   onShow: function () {
     var self = this;
-    console.log('----------------------onShow------------------------------')
-    var zone = wx.getStorageSync('zone') || []
-    console.log(zone)
+    console.log('----------------------onShow------------------------------');
+    util.getUserInfo();
+    util.getLocation();
+
+    var zone = wx.getStorageSync('zone') || [];
+
     self.setData({
+      user: wx.getStorageSync('user'),
       nation: zone.address_component.nation,
       province: zone.address_component.province,
     })
-    util.getUserInfo();
-    util.getLocation();
+    this.onLoad();
   },
 
   /**
@@ -42,11 +45,10 @@ Page({
 
     console.log('-----------------  onLoad success ----------------- ');
     var self = this;
-    var user = wx.getStorageSync('cookie') || []
-    console.log(user.openid);
-    var openid = user.openid;
+    var cookie = wx.getStorageSync('cookie') || []
 
-
+    console.log(cookie.openid);
+    var openid = cookie.openid;
 
     wx.request({
       method: 'GET',
@@ -126,12 +128,10 @@ Page({
   getUserInfo: function (e) {
     console.log('----------------------getUserInfo------------------------------')
     console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+    util.getUserInfo();
+    util.getLocation();
   },
+
   getSystemInfo: function (e) {
     console.log('----------------------getSystemInfo------------------------------')
     wx.getSystemInfo({
@@ -143,9 +143,11 @@ Page({
   bindGetUserInfo: function (e) {
     console.log('----------------------bindGetUserInfo------------------------------')
     console.log(e.detail.userInfo)
-    wx.setStorageSync('user', e.detail.userInfo)
+    util.getUserInfo();
+
     this.setData({
-      userInfo: e.detail.userInfo,
+      user: wx.getStorageSync('user')
     })
+    this.onShow();
   }
 })

@@ -1,9 +1,11 @@
 <view class="main">
   <view class="header">
-    <open-data class='thumb' type="userAvatarUrl"></open-data>
-    <open-data type="userNickName"></open-data>
-    <text class="center">{{nation}}{{province}}</text>
-
+    <view wx:if="{{user}}">
+      <open-data class='thumb' type="userAvatarUrl"></open-data>
+      <open-data type="userNickName"></open-data>
+      <text class="center">{{nation}}{{province}}</text>
+    </view>
+    <view wx:else>请授权</view>
   </view>
 
   <view class="address-box">
@@ -21,17 +23,18 @@
       <view>{{address.detail}}</view>
     </view> -->
   </view>
-
-  <view class="address-box" data-type="about" bindtap="getUserInfo">
-    <view wx:if='{{status !=2 }}' class="address-manage">
-      <!-- <view class="orders">申请成为导购</view> -->
-      <navigator url="/pages/apply/apply">入住申请</navigator>
+  <view wx:if="{{user}}">
+    <view class="address-box" data-type="about">
+      <view wx:if='{{status !=2 }}' class="address-manage">
+        <!-- <view class="orders">申请成为导购</view> -->
+        <navigator url="/pages/apply/apply">入住申请</navigator>
+      </view>
     </view>
-  </view>
-  <view class="address-box" data-type="about" bindtap="getUserInfo">
-    <view wx:if='{{status}}' class="address-manage">
-      <!-- <view class="orders">申请成为导购</view> -->
-      <navigator url="/pages/goods/goods">导购管理</navigator>
+    <view class="address-box" data-type="about">
+      <view wx:if='{{status}}' class="address-manage">
+        <!-- <view class="orders">申请成为导购</view> -->
+        <navigator url="/pages/guide/index">导购管理</navigator>
+      </view>
     </view>
   </view>
   <!-- <view class="address-box" data-type="本机信息" bindtap="getSystemInfo">
@@ -44,10 +47,12 @@
       <text class="user-list-title">关于我们</text>
     </view>
   </view> -->
+  <view wx:else>
+    <view class="address-box">
+      <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权</button>
+    </view>
 
-
-  <view class="address-box">
-    <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权</button>
   </view>
+
 
 </view>

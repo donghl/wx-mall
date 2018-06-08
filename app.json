@@ -1,20 +1,21 @@
 {
   "pages": [
-    "pages/0index/index",
+    "pages/index/index",
     "pages/temp/index",
+    "pages/temp/demo1",
     "pages/temp/test",
     "pages/temp/question-ask",
     "pages/category/category",
     "pages/cart/cart",
-    "pages/list/list",
-    "pages/user/user",
-    "pages/goods/goods",
-    "pages/goods/edit",
-    "pages/goods/add",
+    "pages/goods/list",
+    "pages/goods/details",
     "pages/orders/list",
     "pages/orders/orders",
-    "pages/details/details",
-    "pages/guide/demo",
+    "pages/guide/index",
+    "pages/guide/goods",
+    "pages/guide/edit",
+    "pages/guide/add",
+    "pages/user/user",
     "pages/apply/apply"
   ],
   "window": {
@@ -31,13 +32,13 @@
     "backgroundColor": "#f5f5f5",
     "list": [
       {
-        "pagePath": "pages/0index/index",
+        "pagePath": "pages/index/index",
         "iconPath": "image/button/12.png",
         "selectedIconPath": "image/button/11.png",
         "text": "主页"
       },
       {
-        "pagePath": "pages/temp/question-ask",
+        "pagePath": "pages/temp/demo1",
         "iconPath": "image/button/22.png",
         "selectedIconPath": "image/button/21.png",
         "text": "TEST"
