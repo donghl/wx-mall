@@ -18,7 +18,9 @@ Page({
   onShow: function () {
     var self = this;
     console.log('----------------------onShow------------------------------');
-    util.getUserInfo();
+    console.log(app.gData.userInfo);
+
+    // util.getUserInfo();
     util.getLocation();
 
     var zone = wx.getStorageSync('zone') || [];
@@ -28,7 +30,6 @@ Page({
       nation: zone.address_component.nation,
       province: zone.address_component.province,
     })
-    this.onLoad();
   },
 
   /**
@@ -52,7 +53,7 @@ Page({
 
     wx.request({
       method: 'GET',
-      url: api.applyApi.url,
+      url: api.applyUrl,
       data: { openid },
       header: {
         'content-type': 'application/json'
@@ -70,7 +71,7 @@ Page({
      * 发起请求获取订单列表信息
      */
     wx.request({
-      url: api.orderApi.url,
+      url: api.orderUrl,
       success(res) {
         console.log(res)
         // self.setData({
@@ -125,12 +126,12 @@ Page({
       }
     })
   },
-  getUserInfo: function (e) {
-    console.log('----------------------getUserInfo------------------------------')
-    console.log(e)
-    util.getUserInfo();
-    util.getLocation();
-  },
+  // getUserInfo: function (e) {
+  //   console.log('----------------------getUserInfo------------------------------')
+  //   console.log(e)
+  //   // util.getUserInfo();
+  //   util.getLocation();
+  // },
 
   getSystemInfo: function (e) {
     console.log('----------------------getSystemInfo------------------------------')
@@ -143,11 +144,11 @@ Page({
   bindGetUserInfo: function (e) {
     console.log('----------------------bindGetUserInfo------------------------------')
     console.log(e.detail.userInfo)
-    util.getUserInfo();
-
+    // util.getUserInfo();
+    wx.setStorageSync('user', e.detail.userInfo)
     this.setData({
-      user: wx.getStorageSync('user')
+      user: e.detail.userInfo // wx.getStorageSync('user')
     })
-    this.onShow();
+    util.getLocation();
   }
 })

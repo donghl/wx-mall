@@ -42,7 +42,7 @@ Page({
     const self = this;
     const num = this.data.num;
     let total = this.data.totalNum;
-    const carts = app.globalData.cardList; // 获取购物车列表
+    const carts = app.gData.cartList; // 获取购物车列表
     e.currentTarget.dataset.obj.num = 1;
     carts.push(e.currentTarget.dataset.obj);
     console.log(carts);

@@ -10,7 +10,7 @@
 
 <view class="orders-box">
   <view class="orders">订单详情</view>
-  <!-- <view class="orders-list" wx:for="{{orders}}" wx:key="index">
+   <view class="orders-list" wx:for="{{orders}}" wx:key="index">
       <view class="orders-number">订单编号：{{item.number}}</view>
       <view class="orders-detail">
         <image src="{{item.thumb}}"></image>
@@ -20,7 +20,7 @@
       </view>
       <view class="orders-footer">
         <text>实付：￥{{item.money}}</text>
-        <button size="mini" class="orders-btn" bindtap="payOrders">付款</button>
+        <button size="mini" class="orders-btn" data-order="{{item}}"  loading="{{loading}}" bindtap="requestPayment">付款</button>
       </view>
-    </view> -->
+    </view> 
 </view>

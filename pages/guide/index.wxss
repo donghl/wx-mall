@@ -126,3 +126,22 @@ page {
 .q-image-remover {
   text-align: center;
 }
+
+
+.market-icon-list{
+  background: #fff;
+  padding: 20rpx 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.market-icon-item{
+  width: 250rpx;
+  display: inline-block;
+  text-align: center;
+  color: #323233;
+  font-size: 24rpx;
+}
+.market-icon-text{
+  color: #ff8862;
+  font-size: 30rpx;
+}

@@ -14,10 +14,10 @@ Page({
 
   onShow() {
     console.log('---------------------- cart  onShow------------------------------')
-    console.log(app.globalData.cardList);
+    console.log(app.gData.cartList);
 
     this.setData({
-      carts: app.globalData.cardList
+      carts: app.gData.cartList
     });
     console.log(this.data.carts.length);
 

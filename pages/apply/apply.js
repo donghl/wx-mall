@@ -52,7 +52,7 @@ Page({
 
     wx.request({
       method: 'GET',
-      url: api.applyApi.url,  
+      url: api.applyUrl,  
       data: { openid },
       header: {
         'content-type': 'application/json'
@@ -212,7 +212,7 @@ Page({
     // wx.setStorageSync('zone', that.data.zone)
     
     wx.request({
-      url: api.applyApi.url,//
+      url: api.applyUrl,//
       method: "PUT",
       data: { key:{ 'openid':that.data.openid},
         value: { "name": that.data.name, "card": that.data.card, 'zone': wx.getStorageSync('zone'), 'status':1} },

@@ -4,17 +4,20 @@
     "pages/temp/index",
     "pages/temp/demo1",
     "pages/temp/test",
+    "pages/temp/pic",
     "pages/temp/question-ask",
     "pages/category/category",
     "pages/cart/cart",
     "pages/goods/list",
     "pages/goods/details",
+    "pages/goods/edit",
+    "pages/goods/add",
     "pages/orders/list",
     "pages/orders/orders",
+    "pages/guide/demo",
     "pages/guide/index",
     "pages/guide/goods",
     "pages/guide/edit",
-    "pages/guide/add",
     "pages/user/user",
     "pages/apply/apply"
   ],
@@ -38,7 +41,7 @@
         "text": "主页"
       },
       {
-        "pagePath": "pages/temp/demo1",
+        "pagePath": "pages/temp/question-ask",
         "iconPath": "image/button/22.png",
         "selectedIconPath": "image/button/21.png",
         "text": "TEST"

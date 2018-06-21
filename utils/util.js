@@ -58,10 +58,50 @@ var showModel = (title, content) => {
     showCancel: false
   })
 }
+var uploadFile = (data) => {
+  console.log('======================util.uploadFile==================================')
 
+  var uploadImgCount = 0;
+  for (var i = 0, h = data.files.length; i < h; i++) {
+    wx.uploadFile({
+      url: api.multiUpload.url,// , //图片插入接口，此处为单个文件处理，多个文件则用循环处理 
+      filePath: data.path[i],
+      name: 'myfile',
+      // formData: {
+      //   'subpath': 'goods',
+      //   'collection': 'goods',
+      //   'uuid': that.data.uuid,
+      //   'openid': cookie.openid,
+      //   'arr': arr,
+      //   'key': i   //图片在数组里面的索引
+      // },
+      data,
+      header: {
+        "Content-Type": "multipart/form-data"
+      },
+      success: function (res) {
+        uploadImgCount++;
+        var data = res.data
+        //do something
+        console.log(data)
+        console.log(res.statusCode)
+        if (res.statusCode != 200) {
+          wx.hideToast();
+          wx.showModal({
+            title: '错误提示',
+            content: '上传图片失败',
+            showCancel: false,
+            success: function (res) {
+            }
+          })
+        }
+      }
+    })
+  }
+}
 // 请求
 var http = (method, url, data, fun, header, auth) => {
-  console.log('======================util.http==================================')
+  console.log('### util.js ======================util.http :',method,url)
   console.log(method);
   console.log(url)
   console.log(data);
@@ -162,7 +202,7 @@ function getCategory() {
 
   console.log(cc);
   // if (cc == '') {
-  var url = api.categoryApi.url;
+  var url = api.categoryUrl;
   var data = {};
   data.enable = true;
 
@@ -186,6 +226,7 @@ function getCategory() {
   }, header)
   // } 
 }
+
 function getUserInfo() {
   console.log('util --------------- getUserInfo  ---------------- ')
   let self = this;
@@ -202,23 +243,7 @@ function getUserInfo() {
             console.log(res)
             wx.setStorageSync('user', res.userInfo)
             return res.userInfo;
-            // app.globalData.userInfo = res.userInfo
 
-            // //写入缓存
-            // wx.setStorage({
-            //   key: 'userInfo',
-            //   data: app.globalData.userInfo,
-            //   success: function (res) {
-            //     console.log("insert success")
-            //   },
-            //   fail: function () {
-            //     // fail
-            //   },
-            //   complete: function () {
-            //     // complete
-            //   }
-            // })
-            // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
             // 所以此处加入 callback 以防止这种情况
             if (this.userInfoReadyCallback) {
               this.userInfoReadyCallback(res)
@@ -242,4 +267,4 @@ function getUserInfo() {
   })
 }
 
-module.exports = { formatTime, showBusy, showSuccess, showModel, http, getSystemInfo, getUserInfo, getLocation, imageUtil, getCategory }
+module.exports = { formatTime, showBusy, showSuccess, showModel, http, getSystemInfo, getLocation, imageUtil, getCategory }

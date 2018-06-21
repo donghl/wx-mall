@@ -23,37 +23,36 @@ Page({
   onPageScroll: function (res) {
     console.log(res.scrollTop);
   },
-
+  
   onShow:function(){
     console.log('index-------------- onShow  -------------- ')
-    var userinfo = util.getUserInfo();
-    console.log(userinfo);
+    // var userinfo = util.getUserInfo();
+    // console.log(userinfo);
     util.getLocation();
 
   },
 
   onLoad: function () {
+    console.log('### index.js-------------- onLoad  -------------- ')
+    console.log(app.gData);
     var that = this
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function (userInfo) {
       //更新数据
       that.setData({
-        imageWidth: app.globalData.screenWidth,
-        imageHeight: app.globalData.screenHightScale * 650,
-        inputViewWidth: app.globalData.screenWidth,
-        inputViewHeight: app.globalData.screenHightScale * 88,
-        inputWidth: app.globalData.screenWidth,
-        inputHeight: app.globalData.screenHightScale * 177
+        imageWidth: app.gData.screenWidth,
+        imageHeight: app.gData.screenHightScale * 650,
+        inputViewWidth: app.gData.screenWidth,
+        inputViewHeight: app.gData.screenHightScale * 88,
+        inputWidth: app.gData.screenWidth,
+        inputHeight: app.gData.screenHightScale * 177
       })
     })
-
-   
-
   },
   goList(e){
     console.log(e);
     wx.navigateTo({
-      url: '../../pages/list/list?type=' + e.currentTarget.dataset.type + '&category=' + e.currentTarget.dataset.category,
+      url: '../../pages/goods/list?type=' + e.currentTarget.dataset.type + '&category=' + e.currentTarget.dataset.category,
     })
   }
 })

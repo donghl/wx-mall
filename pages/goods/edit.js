@@ -1,4 +1,4 @@
-// var uuid = require('../../lib/node-uuid/uuid.modified.js');
+// pages/goods/edit.js
 var uuid = require('../../lib/uuid/we-uuidv4');
 var util = require('../../utils/util.js')
 // var config = require('../../config/config.js')
@@ -9,28 +9,23 @@ import { createQuestion } from '../../services/question.service'
 import config from '../../config/config'
 
 Page({
+
   /**
    * 页面的初始数据
    */
   data: {
-    titleCount: 0,
-    contentCount: 0,
-    title: '',
-    content: '',
-    images: [],
-    // category: wx.getStorageSync('category'),
-    multiIndex: [0, 0],
-    multiArray: [[], []],
-    uuid: null,
-    date: null
+    Obj: null
   },
 
   /**
    * 生命周期函数--监听页面加载
-   * 
    */
   onLoad: function (options) {
-    console.log('add ------onload -----')
+    console.log('### edit.js ----------------- onLoad -------------------')
+    console.log(options)
+    this.setData({
+      Obj: JSON.parse(options.obj)
+    })
     var myDate = new Date();
     console.log(myDate);
     var category = wx.getStorageSync('category');
@@ -48,7 +43,7 @@ Page({
     this.setData({
       category: wx.getStorageSync('category'),
       uuid: uuid(),
-      multiArray:arr,
+      multiArray: arr,
       date: myDate
     })
   },
@@ -57,18 +52,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log('add ------onReady -----')
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('add ------onShow -----')
-    // // v1 是基于时间戳生成uuid 
-    // console.log(uuid.v1());
-    // // v4 是随机生成uuid 
-    // console.log(uuid.v4());  
+
   },
 
   /**
@@ -82,6 +73,27 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
 
   },
 
@@ -149,146 +161,37 @@ Page({
     console.log(this.data)
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-  bindTextAreaBlur: function (e) {
-    console.log(e)
-  },
-  bindP1Blur: function (e) {
-    console.log(e)
-  },
-  chooseImage(e){
-    console.log('==================chooseImage===========================')
-    wx.chooseImage({
-      count: 3,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: res => {
-        const images = this.data.images.concat(res.tempFilePaths)
-        this.data.images = images.length <= 3 ? images : images.slice(0, 3)
-        $digest(this)
-      }
-    })
-  },
-  uploadImages: function (e) {
-    console.log('==================uploadImages===========================')
-    var that = this;
-    console.log(e.target.dataset.name)
-    var arr = e.target.dataset.name;
-    that.setData({
-      progress: 0
-    })
-
-    var cookie = wx.getStorageSync('cookie') || []
-    console.log(cookie)
-    wx.chooseImage({
-      count: 9, // 默认9
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        console.log('==================chooseImage===========================')
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        console.log(res)
-
-        var tempFilePaths = res.tempFilePaths;
-        console.log(tempFilePaths);
-        // console.log(that.data.openid);
-
-        var uploadImgCount = 0;
-        for (var i = 0, h = tempFilePaths.length; i < h; i++) {
-          const uploadTask = wx.uploadFile({
-            url: api.multiUpload.url,// , //图片插入接口，此处为单个文件处理，多个文件则用循环处理 
-            filePath: tempFilePaths[i],
-            name: 'myfile',
-            formData: {
-              'subpath': 'goods',
-              'collection': 'goods',
-              'uuid': that.data.uuid,
-              'openid': cookie.openid,
-              'arr': arr,
-              'key': i   //图片在数组里面的索引
-            },
-            header: {
-              "Content-Type": "multipart/form-data"
-            },
-            success: function (res) {
-              uploadImgCount++;
-              var data = res.data
-              //do something
-              console.log(data)
-              console.log(res.statusCode)
-              if (res.statusCode != 200) {
-                wx.hideToast();
-                wx.showModal({
-                  title: '错误提示',
-                  content: '上传图片失败',
-                  showCancel: false,
-                  success: function (res) {
-                  }
-                })
-              }
-            }
-          })
-
-          uploadTask.onProgressUpdate((res) => {
-            console.log('上传进度', res.progress),
-              that.setData({
-                progress: res.progress
-              })
-            console.log('已经上传的数据长度', res.totalBytesSent)
-            console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
-          })
-        }
-      }
-    })
-  },
-
   submitForm: function (e) {
     var that = this;
     var user = wx.getStorageSync('cookie') || [];
-
-    var key = { 'openid': user.openid };
+    var key = { '_id': this.data.Obj._id };
     var zone = wx.getStorageSync('zone') || [];
     console.log(e)
     var cc = e.detail.value.type;
 
     console.log(cc);
 
-    var data = Object.assign(key, e.detail.value, 
-      // { category1: that.data.category[cc[0]].name},
-      // { category2: that.data.category[cc[0]].sub[cc[1]].name },
-    zone,{status:0});// key.extend(e.detail.value)
+    var value = Object.assign(e.detail.value,
+      zone, { status: 0 });// key.extend(e.detail.value)
     that.setData({
-      v1:that.data.category[cc[0]].name,
-      v2:that.data.category[cc[0]].sub[cc[1]].name
+      v1: that.data.category[cc[0]].name,
+      v2: that.data.category[cc[0]].sub[cc[1]].name
     })
     var v1 = that.data.category[cc[0]].name;
     var v2 = that.data.category[cc[0]].sub[cc[1]].name;
-    data.type[0] = v1
-    data.type[1] = v2
+    value.type[0] = v1
+    value.type[1] = v2
 
+    var data = {
+      key: null,
+      value: null
+    };
+    data.key = key;
+    data.value = value;
     // wx.setStorageSync('zone', that.data.zone)
     var url = '/api/v1/goods';
 
-    util.http('POST', url, data, (res) => {
+    util.http('PUT', url, data, (res) => {
       console.log(res)
       if (res.result != 0) {
         wx.showToast({
@@ -306,7 +209,7 @@ Page({
     })
 
     // wx.request({
-    //   url: api.goodsApi.url,
+    //   url: api.goodsUrl,
     //   method: "PUT",
     //   data: {
     //     key: { 'uuid': that.data.uuid },
@@ -324,6 +227,41 @@ Page({
     //   }
     // });
 
-  }
+  },
+  formSubmit: function (e) {
+    let formId = e.detail.formId;
+    this.dealFormIds(formId); //处理保存推送码
+    let type = e.detail.target.dataset.type;
+    //根据type的值来执行相应的点击事件
+    //...
+  },
+  dealFormIds: function (formId) {
+    let formIds = app.gData.gloabalFomIds;//获取全局数据中的推送码gloabalFomIds数组
+    if (!formIds) formIds = [];
+    let data = {
+      formId: formId,
+      expire: parseInt(new Date().getTime() / 1000) + 604800 //计算7天后的过期时间时间戳
+    }
+    formIds.push(data);//将data添加到数组的末尾
+    app.gData.gloabalFomIds = formIds; //保存推送码并赋值给全局变量
+  },
+
+  saveFormIds: function () {
+    var formIds = app.gData.gloabalFomIds; // 获取gloabalFomIds
+    if (formIds.length) {//gloabalFomIds存在的情况下 将数组转换为JSON字符串
+      formIds = JSON.stringify(formIds);
+      app.gData.gloabalFomIds = '';
+    }
+    wx.request({//通过网络请求发送openId和formIds到服务器
+      url: 'https://www.x.com',
+      method: 'GET',
+      data: {
+        openId: 'openId',
+        formIds: formIds
+      },
+      success: function (res) {
+      }
+    });
+  },
 
 })

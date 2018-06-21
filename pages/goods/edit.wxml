@@ -16,18 +16,18 @@
         <text class='font'>标题</text>
       </view>
       <view class="edit.cem">
-        <input name="name" data-name="{{goods.name}}" placeholder="例如：xx品牌 xx 商品" />
+        <input name="name"  value="{{Obj.name}}" data-name="{{Obj.name}}" placeholder="例如：xx品牌 xx 商品" />
       </view>
     </view>
 
     <view class="flex-view-item">
       <picker mode="multiSelector" name='type' bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range-key="{{'name'}}" range="{{multiArray}}">
         <view class="picker">
-          分类：{{multiArray[0][multiIndex[0]].name}}，{{multiArray[1][multiIndex[1]].name}}
+          分类：{{Obj.category1}}，{{Obj.category2}}
         </view>
       </picker>
       <view class="button.aa">
-        <button class="button.aa" id='1' data-name='codes' bindtap='chooseImage' plain='true'>条码</button>
+        <button class="button.aa" size="mini" id='1' data-name='codes' bindtap='chooseImage' plain='true'>条码</button>
       </view>
     </view>
 
@@ -39,7 +39,7 @@
         </view>
       </view>
       <view class="section">
-        <textarea id='dd1' name='detail' data-detail="{{goods.detail}}" auto-height placeholder="例如：x种颜色可选" />
+        <textarea id='dd1' name='detail' data-detail="{{goods.detail}}" value="{{Obj.detail}}" auto-height placeholder="例如：x种颜色可选" />
       </view>
       <view class="right imgs">
         <view class="img" wx:for="{{item.info_file}}" wx:for-item="img" wx:key="img" id="img" bindtap='previewImg' id="img" data-imgs='{{item.info_file}}' data-currentimg="{{img}}">
@@ -47,7 +47,7 @@
         </view>
       </view>
       <view class="button.aa">
-        <button class='button' id='1' data-name='pics' bindtap='uploadImages' plain='true'>照片</button>
+        <button class='button' size="mini" id='1' data-name='pics' bindtap='uploadImages' plain='true'>照片</button>
       </view>
 
     </view>

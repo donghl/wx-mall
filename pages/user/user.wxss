@@ -1,7 +1,7 @@
 /* @import '../common/common.wxss'; */
 
 .header {
-  display:flex;
+  display: flex;
   position: relative;
   height: 160rpx;
   line-height: 100rpx;
@@ -20,27 +20,44 @@
   border-radius: 50%;
 }
 
+.header .thumb .left {
+  display: inline-block;
+  height: 40rpx;
+  margin: 10rpx 0;
+}
+
+.header .thumb  .right {
+  display: inline-block;
+  justify-content: space-between;
+  align-items: right;
+  height: 40rpx;
+  margin-left: 20rpx;
+}
+
 .header.font {
-  display:flex;
+  display: flex;
   text-align: center;
   font-family: "Times New Roman";
   font-size: smaller;
 }
 
-
 .left {
-  /* font-family: "黑体"; */
   color: #888;
   font-size: 40rpx;
 }
+
 .center {
-  /* font-family: "楷体"; */
-  color: #ff0000;
-  font-size: 30rpx;
+  font-family: "楷体";
+  display: flex;
+  justify-content: space-between;
+  float: right;
+  color: #f00;
+  font-size: 25rpx;
 }
+
 .right {
   /* font-family: "楷体"; */
-  color: #ff0000;
+  color: #f00;
   font-size: 80rpx;
 }
 

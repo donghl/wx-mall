@@ -5,11 +5,25 @@
     </navigator>
   </view>
 
+
+  <!-- 轮播图下方的导航图标 -->
+  <view class="market-icon-list">
+    <view class="market-icon-item" data-id='new' data-sort='{timestamp:-1}' bindtap="tabClick">
+      <view class="market-icon-text" >最新</view>
+    </view>
+    <view class="market-icon-item" data-id='hot' data-sort='{timestamp:1}' bindtap="tabClick">
+      <view class="market-icon-text">最热</view>
+    </view>
+    <view class="market-icon-item" data-id='add' data-sort='{name:-1}' bindtap="tabClick">
+      <view class="market-icon-text">补货</view>
+    </view>
+  </view>
+
   <view class="group-list">
     <!-- <view class="list-box">
     <view class="newest-list"> -->
     <block wx:for="{{goods}}" wx:key="index" wx:for-index="index">
-      <view class="box" bindtap="buyView">
+      <view class="box" data-hi="WeChat" data-id="{{item.id}}" data-obj="{{item}}" bindtap="editGoods" bindlongtap="longTap">
         <image src="{{item.img}}" style="width:369rpx;height:370rpx;" class="image"></image>
         <view class="title">
           <text>{{item.name}}</text>
@@ -22,7 +36,7 @@
     </block>
     <!-- </view> -->
   </view>
-  <navigator url="../guide/add">
+  <navigator url="../goods/add">
     <button class='.circle-float'>┼</button>
   </navigator>
 </view>

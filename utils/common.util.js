@@ -26,6 +26,9 @@ const $init = (page) => {
 }
 
 const $digest = (page) => {
+  console.log(page.data)
+  console.log(page.$data)
+
   let data = page.data
   let $data = page.$data
   let ready2set = {}

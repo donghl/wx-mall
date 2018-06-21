@@ -3,7 +3,7 @@
     <view wx:if="{{user}}">
       <open-data class='thumb' type="userAvatarUrl"></open-data>
       <open-data type="userNickName"></open-data>
-      <text class="center">{{nation}}{{province}}</text>
+      <text class='center'>{{nation}}{{province}}</text>
     </view>
     <view wx:else>请授权</view>
   </view>
@@ -33,7 +33,7 @@
     <view class="address-box" data-type="about">
       <view wx:if='{{status}}' class="address-manage">
         <!-- <view class="orders">申请成为导购</view> -->
-        <navigator url="/pages/guide/index">导购管理</navigator>
+        <navigator url="/pages/guide/index?id={{openid}}">导购管理</navigator>
       </view>
     </view>
   </view>
