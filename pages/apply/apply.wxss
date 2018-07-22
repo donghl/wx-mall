@@ -1,8 +1,6 @@
 /* pages/apply/apply.wxss */
 /* @import '../common/common.wxss'; */
 
-
-
 .picker{
     padding: 13px;
     background-color: #FFFFFF;

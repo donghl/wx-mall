@@ -1,42 +1,46 @@
-<view id="panel" class="flex-column">
-  <view class="flex-row" style="display: flex; flex-direction: row; justify-content:center;">
-    <view class="flex-view-item">提交身份证信息-></view>
-    <view class="flex-view-item">审核-></view>
-    <view class="flex-view-item">通过</view>
-  </view>
+<view class='main'>
+  <view id="panel" class="flex-column">
+    <view class="flex-row" style="display: flex; flex-direction: row; justify-content:center;">
+      <view class="flex-view-item">提交身份证信息-></view>
+      <view class="flex-view-item">审核-></view>
+      <view class="flex-view-item">通过</view>
+    </view>
+    <view id="panel" class="flex-row">
+      <label>{{zone.address}}</label>
+      <progress percent="{{progress}}" show-info="true" color="red" stroke-width="5" activeColor="green" backgroundColor="#ccc" />
+    </view>
+    <form bindsubmit='submitForm'>
 
-  <form bindsubmit='submitForm'>
+      <view style="width:750rpx;height:750rpx;background-color:#ffff;">
+        <image src='https://donghl.cn{{user.zheng}}' mode="aspectFit" style="width:100%;height:100%;"></image>
 
-    <view style="width:750rpx;height:750rpx;background-color:#ffff;">
-      <image src='https://donghl.cn/{{zheng}}' mode="aspectFit" style="width:100%;height:100%;"></image>
+      </view>
+      <view>
+        <button class='button' id='1' data-name='zheng' bindtap='chooseImage'>身份证正面</button>
+      </view>
 
-    </view>
-    <view>
-      <button class='button' id='1' data-name='zheng' bindtap='chooseImage'>身份证正面</button>
-    </view>
+      <view style="width:750rpx;height:750rpx;background-color:#ffff;">
+        <image src='https://donghl.cn{{user.fan}}' mode="aspectFit" style="width:100%;height:100%;"></image>
+      </view>
+      <view>
+        <button class='button' id='1' data-name='fan' bindtap='chooseImage'>身份证反面</button>
+      </view>
 
-    <view style="width:750rpx;height:750rpx;background-color:#ffff;">
-      <image src='https://donghl.cn/{{fan}}' mode="aspectFit" style="width:100%;height:100%;"></image>
-    </view>
-    <view>
-      <button class='button' id='1' data-name='fan' bindtap='chooseImage'>身份证反面</button>
-    </view>
+      <view style="width:750rpx;height:750rpx;background-color:#ffff;">
+        <image src='https://donghl.cn{{user.he}}' mode="aspectFit" style="width:100%;height:100%;"></image>
 
-    <view style="width:750rpx;height:750rpx;background-color:#ffff;">
-      <image src='https://donghl.cn/{{he}}' mode="aspectFit" style="width:100%;height:100%;"></image>
+      </view>
+      <view>
+        <button class='button' id='1' data-name='he' bindtap='chooseImage'>手持身份证</button>
+      </view>
 
-    </view>
-    <view>
-      <button class='button' id='1' data-name='he' bindtap='chooseImage'>手持身份证</button>
-    </view>
-
-    <view class="inputView">
-      <input class="input" name="name" value='{{name}}' placeholder="请输入真实姓名" placeholder-style="color: red" />
-    </view>
-    <view class="inputView">
-      <input class="input" name="card" value='{{card}}' placeholder="请输入身份证信息" placeholder-style="color: red" />
-    </view>
-    <!-- <view class="inputView">
+      <view class="inputView">
+        <input class="input" name="name" value='{{user.name}}' placeholder="真实姓名" placeholder-style="color: red" />
+      </view>
+      <view class="inputView">
+        <input class="input" name="card" value='{{user.card}}' placeholder="身份证号码" placeholder-style="color: red" />
+      </view>
+      <!-- <view class="inputView">
       <picker name='picker' bindchange="bindPickerChange" value="{{zone}}" range="{{array}}" placeholder="代购的地区">
         <view class="picker">
           {{array[zone]}}
@@ -44,27 +48,29 @@
       </picker>
     </view> -->
 
-    <view style="width:750rpx;height:250rpx;background-color:#ffff;">
-      <button class='button' form-type='submit'>提交审核</button>
+      <view>
+        <button type="primary" class="save-btn" formType='submit'>提交</button>
+        <!-- <button class='save-btn' form-type='submit'>提交</button> -->
+      </view>
+
+    </form>
+
+
+    <!-- 黑框提示并消失 -->
+    <toast hidden="{{toast1Hidden}}" bindchange="toast1Change">
+      {{notice_str}}
+    </toast>
+    <!-- 确认框 及 提示框 -->
+    <view class="page__bd">
+      <modal title="确认" confirm-text="确定" cancel-text="取消" hidden="{{modalHidden}}" mask bindconfirm="confirm_one" bindcancel="cancel_one">
+        确认提交么？
+      </modal>
+      <modal class="modal" hidden="{{modalHidden2}}" no-cancel bindconfirm="modalChange2" bindcancel="modalChange2">
+        <view> 提示 </view>
+        <view> 清空成功 </view>
+      </modal>
     </view>
 
-  </form>
 
-
-     <!-- 黑框提示并消失 -->  
-    <toast hidden="{{toast1Hidden}}" bindchange="toast1Change">  
-        {{notice_str}}  
-    </toast>  
-    <!-- 确认框 及 提示框 -->  
-    <view class="page__bd">  
-        <modal title="确认" confirm-text="确定" cancel-text="取消" hidden="{{modalHidden}}" mask bindconfirm="confirm_one" bindcancel="cancel_one">  
-            确认提交么？  
-        </modal>  
-        <modal class="modal" hidden="{{modalHidden2}}" no-cancel bindconfirm="modalChange2" bindcancel="modalChange2">  
-            <view> 提示 </view>  
-            <view> 清空成功 </view>  
-        </modal>  
-    </view>  
-    
-    
+  </view>
 </view>

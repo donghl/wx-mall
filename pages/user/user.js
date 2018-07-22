@@ -9,7 +9,7 @@ Page({
   data: {
     nation: null,    //国家
     province: null,  //省/市
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    // canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
   /**
@@ -22,7 +22,6 @@ Page({
 
     // util.getUserInfo();
     util.getLocation();
-
     var zone = wx.getStorageSync('zone') || [];
 
     self.setData({
@@ -30,6 +29,28 @@ Page({
       nation: zone.address_component.nation,
       province: zone.address_component.province,
     })
+
+    var cookie = wx.getStorageSync('cookie') || []
+
+    console.log(cookie.openid);
+    var openid = cookie.openid;
+
+    var url = api.applyUrl
+    var data = { search: { 'openid': openid } }
+
+    util.http('GET', url, data, (res) => {
+      if (res.errMsg) {
+        util.showModel(res.errMsg);
+      } else {
+        console.log('### user.js  --------------- applyUrl ----------------success')
+        console.log(res.data)
+        self.setData({
+          status: res.data.rows[0].status,
+        })
+
+      }
+    })
+
   },
 
   /**
@@ -46,26 +67,24 @@ Page({
 
     console.log('-----------------  onLoad success ----------------- ');
     var self = this;
-    var cookie = wx.getStorageSync('cookie') || []
 
-    console.log(cookie.openid);
-    var openid = cookie.openid;
 
-    wx.request({
-      method: 'GET',
-      url: api.applyUrl,
-      data: { openid },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        console.log('----------------------------------------------------')
-        console.log(res.data) //获取openid  
-        self.setData({
-          status: res.data.data.rows[0].status
-        })
-      }
-    })
+    // wx.request({
+    //   method: 'GET',
+    //   url: api.applyUrl,
+    //   data: { openid },
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   success: function (res) {
+    //     console.log('----------------------------------------------------')
+    //     console.log(res.data) //获取openid  
+    //     self.setData({
+    //       status: res.data.data.rows[0].status,
+    //       wx:res.data.data.rows[0].wx
+    //     })
+    //   }
+    // })
 
     /**
      * 发起请求获取订单列表信息

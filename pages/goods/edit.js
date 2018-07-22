@@ -1,12 +1,19 @@
 // pages/goods/edit.js
 var uuid = require('../../lib/uuid/we-uuidv4');
 var util = require('../../utils/util.js')
-// var config = require('../../config/config.js')
 var api = require('../../config/api.config.js')
-import { promisify } from '../../utils/promise.util'
-import { $init, $digest } from '../../utils/common.util'
-import { createQuestion } from '../../services/question.service'
-import config from '../../config/config'
+
+import {
+  promisify
+} from '../../utils/promise.util'
+import {
+  $init,
+  $digest
+} from '../../utils/common.util'
+import {
+  createQuestion
+} from '../../services/question.service'
+import cfg from '../../config/config'
 
 Page({
 
@@ -30,7 +37,10 @@ Page({
     console.log(myDate);
     var category = wx.getStorageSync('category');
     console.log(category);
-    var arr = [[], []];
+    var arr = [
+      [],
+      []
+    ];
     for (var i = 0; i < category.length; i++) {
       arr[0][i] = category[i];
     }
@@ -164,7 +174,9 @@ Page({
   submitForm: function (e) {
     var that = this;
     var user = wx.getStorageSync('cookie') || [];
-    var key = { '_id': this.data.Obj._id };
+    var key = {
+      '_id': this.data.Obj._id
+    };
     var zone = wx.getStorageSync('zone') || [];
     console.log(e)
     var cc = e.detail.value.type;
@@ -172,7 +184,9 @@ Page({
     console.log(cc);
 
     var value = Object.assign(e.detail.value,
-      zone, { status: 0 });// key.extend(e.detail.value)
+      zone, {
+        status: 0
+      }); // key.extend(e.detail.value)
     that.setData({
       v1: that.data.category[cc[0]].name,
       v2: that.data.category[cc[0]].sub[cc[1]].name
@@ -236,31 +250,30 @@ Page({
     //...
   },
   dealFormIds: function (formId) {
-    let formIds = app.gData.gloabalFomIds;//获取全局数据中的推送码gloabalFomIds数组
+    let formIds = app.gData.gloabalFomIds; //获取全局数据中的推送码gloabalFomIds数组
     if (!formIds) formIds = [];
     let data = {
       formId: formId,
       expire: parseInt(new Date().getTime() / 1000) + 604800 //计算7天后的过期时间时间戳
     }
-    formIds.push(data);//将data添加到数组的末尾
+    formIds.push(data); //将data添加到数组的末尾
     app.gData.gloabalFomIds = formIds; //保存推送码并赋值给全局变量
   },
 
   saveFormIds: function () {
     var formIds = app.gData.gloabalFomIds; // 获取gloabalFomIds
-    if (formIds.length) {//gloabalFomIds存在的情况下 将数组转换为JSON字符串
+    if (formIds.length) { //gloabalFomIds存在的情况下 将数组转换为JSON字符串
       formIds = JSON.stringify(formIds);
       app.gData.gloabalFomIds = '';
     }
-    wx.request({//通过网络请求发送openId和formIds到服务器
+    wx.request({ //通过网络请求发送openId和formIds到服务器
       url: 'https://www.x.com',
       method: 'GET',
       data: {
         openId: 'openId',
         formIds: formIds
       },
-      success: function (res) {
-      }
+      success: function (res) { }
     });
   },
 

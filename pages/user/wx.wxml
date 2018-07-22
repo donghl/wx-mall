@@ -1,0 +1,17 @@
+<!--pages/user/wx.wxml-->
+<view class='main'>
+
+  <form bindsubmit='submitForm'>
+
+    <view class="inputView">
+      <input class="input" name="wx" value='{{wx}}' placeholder="微信号" placeholder-style="color: red" />
+    </view>
+
+    <view>
+      <button type="primary" class="save-btn" formType='submit'>提交</button>
+      <!-- <button class='save-btn' form-type='submit'>提交</button> -->
+    </view>
+
+  </form>
+
+</view>

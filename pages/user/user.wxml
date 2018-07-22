@@ -3,7 +3,7 @@
     <view wx:if="{{user}}">
       <open-data class='thumb' type="userAvatarUrl"></open-data>
       <open-data type="userNickName"></open-data>
-      <text class='center'>{{nation}}{{province}}</text>
+      <text wx:if="{{nation}}" class='center'>{{nation}}{{province}}</text>
     </view>
     <view wx:else>请授权</view>
   </view>
@@ -23,6 +23,23 @@
       <view>{{address.detail}}</view>
     </view> -->
   </view>
+
+  <view class="address-box">
+    <view class="address-manage" bindtap='bindWx'>
+      <navigator url="/pages/user/wx">绑定微信
+        <text wx:if="{{wx}}" class='right'>{{nation}}{{province}}</text>
+      </navigator>
+    </view>
+  </view>
+  <view class="address-box">
+    <view class="address-manage" bindtap='bindPhone'>
+      <navigator url="/pages/user/phone">绑定手机
+        <text wx:if="{{phone}}" class='right'>{{nation}}{{province}}</text>
+      </navigator>
+
+    </view>
+  </view>
+
   <view wx:if="{{user}}">
     <view class="address-box" data-type="about">
       <view wx:if='{{status !=2 }}' class="address-manage">
@@ -37,6 +54,8 @@
       </view>
     </view>
   </view>
+
+
   <!-- <view class="address-box" data-type="本机信息" bindtap="getSystemInfo">
     <view class="address-manage">
       <text class="user-list-title">本机信息</text>
@@ -47,6 +66,7 @@
       <text class="user-list-title">关于我们</text>
     </view>
   </view> -->
+
   <view wx:else>
     <view class="address-box">
       <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权</button>

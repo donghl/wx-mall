@@ -55,7 +55,7 @@ Page({
   },
 
   getRankList: function (e) {
-    var url = '/api/v1/goods';
+    var url = api.goodsUrl;
     // var data = { code, appid, secret };
     var header = "application/json";
     var parameter = {

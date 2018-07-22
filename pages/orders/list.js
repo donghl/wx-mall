@@ -1,9 +1,16 @@
 var uuid = require('../../lib/uuid/we-uuidv4');
 var util = require('../../utils/util.js')
 var api = require('../../config/api.config.js')
-import { promisify } from '../../utils/promise.util'
-import { $init, $digest } from '../../utils/common.util'
-import { createQuestion } from '../../services/question.service'
+import {
+  promisify
+} from '../../utils/promise.util'
+import {
+  $init,
+  $digest
+} from '../../utils/common.util'
+import {
+  createQuestion
+} from '../../services/question.service'
 import cfg from '../../config/config'
 
 //获取应用实例
@@ -28,8 +35,8 @@ Page({
   onLoad: function (options) {
     var self = this;
     /**
-   * 发起请求获取订单列表信息
-   */
+     * 发起请求获取订单列表信息
+     */
     wx.request({
       url: 'https://www.easy-mock.com/mock/5ad6cd85baad39136d1d293d/api/v1/order',
       success(res) {
@@ -89,38 +96,54 @@ Page({
   onShareAppMessage: function () {
 
   },
-  
+
 
   requestPayment: function (e) {
+    console.log('### list.js =================requestPayment=================')
     console.log(e.currentTarget.dataset.order);
-    
+
     var self = this
 
     self.setData({
       loading: true
     })
 
-    console.log('==================================')
-    console.log(api.paymentUrl)
+
+
     // 此处需要先调用wx.login方法获取code，然后在服务端调用微信接口使用code换取下单用户的openId
     // 具体文档参考https://mp.weixin.qq.com/debug/wxadoc/dev/api/api-login.html?t=20161230#wxloginobject
     app.getUserOpenId(function (err, openid) {
+      console.log(openid)
+      var data = {
+        'openid': openid,
+        'ipaddress': app.gData.ipaddress,
+        'order': e.currentTarget.dataset.order
+      }
+      console.log(data);
+
       if (!err) {
+        console.log(api.paymentUrl)
         wx.request({
-          url: cfg.paymentUrl,
-          data: {
-            openid
-          },
+          url: api.paymentUrl,
+          data: data,
           method: 'POST',
           success: function (res) {
             console.log('unified order success, response is:', res)
-            var payargs = res.data.payargs
+            var payargs = res.data
+            console.log(payargs);
+
             wx.requestPayment({
               timeStamp: payargs.timeStamp,
               nonceStr: payargs.nonceStr,
               package: payargs.package,
               signType: payargs.signType,
-              paySign: payargs.paySign
+              paySign: payargs.paySign,
+              "success": function (res) {
+                console.log('SUCCESS:', res)
+              },
+              "fail": function (res) {
+                console.log('fail:', res)
+              }
             })
 
             self.setData({

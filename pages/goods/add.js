@@ -3,9 +3,14 @@ var uuid = require('../../lib/uuid/we-uuidv4');
 var util = require('../../utils/util.js')
 var api = require('../../config/api.config.js')
 
-import { promisify } from '../../utils/promise.util'
-import { $init, $digest } from '../../utils/common.util'
-import config from '../../config/config'
+import {
+  promisify
+} from '../../utils/promise.util'
+import {
+  $init,
+  $digest
+} from '../../utils/common.util'
+import cfg from '../../config/config'
 
 Page({
 
@@ -18,7 +23,10 @@ Page({
     content: '',
     images: [],
     multiIndex: [0, 0],
-    multiArray: [[], []],
+    multiArray: [
+      [],
+      []
+    ],
   },
 
 
@@ -34,7 +42,10 @@ Page({
     console.log(myDate);
     var category = wx.getStorageSync('category');
     console.log(category);
-    var arr = [[], []];
+    var arr = [
+      [],
+      []
+    ];
     for (var i = 0; i < category.length; i++) {
       arr[0][i] = category[i];
     }
@@ -114,7 +125,7 @@ Page({
       urls: images,
     })
   },
-  
+
   bindMultiPickerChange: function (e) {
     console.log('-------------bindMultiPickerChange-----------------------')
 
@@ -248,7 +259,7 @@ Page({
         var uploadImgCount = 0;
         for (var i = 0, h = tempFilePaths.length; i < h; i++) {
           const uploadTask = wx.uploadFile({
-            url: api.multiUpload.url,// , //图片插入接口，此处为单个文件处理，多个文件则用循环处理 
+            url: api.multiUploadUrl, // , //图片插入接口，此处为单个文件处理，多个文件则用循环处理 
             filePath: tempFilePaths[i],
             name: 'myfile',
             formData: {
@@ -257,7 +268,7 @@ Page({
               'uuid': that.data.uuid,
               'openid': cookie.openid,
               'arr': arr,
-              'key': i   //图片在数组里面的索引
+              'key': i //图片在数组里面的索引
             },
             header: {
               "Content-Type": "multipart/form-data"
@@ -274,8 +285,7 @@ Page({
                   title: '错误提示',
                   content: '上传图片失败',
                   showCancel: false,
-                  success: function (res) {
-                  }
+                  success: function (res) { }
                 })
               }
             }
@@ -298,7 +308,10 @@ Page({
     var that = this;
     var user = wx.getStorageSync('cookie') || [];
 
-    var key = { 'openid': user.openid };
+    var key = {
+      'uuid': that.data.uuid,
+      'openid': user.openid
+    };
     var zone = wx.getStorageSync('zone') || [];
     console.log(e)
     var cc = e.detail.value.type;
@@ -308,7 +321,9 @@ Page({
     var data = Object.assign(key, e.detail.value,
       // { category1: that.data.category[cc[0]].name},
       // { category2: that.data.category[cc[0]].sub[cc[1]].name },
-      zone, { status: 0 });// key.extend(e.detail.value)
+      zone, {
+        status: 0
+      }); // key.extend(e.detail.value)
     that.setData({
       v1: that.data.category[cc[0]].name,
       v2: that.data.category[cc[0]].sub[cc[1]].name
@@ -319,7 +334,7 @@ Page({
     data.type[1] = v2
 
     // wx.setStorageSync('zone', that.data.zone)
-    var url = '/api/v1/goods';
+    var url = api.goodsUrl;
 
     util.http('POST', url, data, (res) => {
       console.log(res)

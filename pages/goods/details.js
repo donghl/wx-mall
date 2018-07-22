@@ -25,8 +25,9 @@ Page({
     show: false,
     scaleCart: false
   },
-  onLoad(e){
-    console.log('### ----------detail  onload ---------------------- ')
+  onLoad: function (e){
+    console.log('### good. detail.js ----------  onload ---------------------- ')
+    console.log(app.gData.cartList)
     console.log(e)
   },
   addCount() {

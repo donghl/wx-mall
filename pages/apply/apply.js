@@ -1,6 +1,8 @@
 // pages/apply/apply.js
 var config = require('../../config/config.js')
 var api = require('../../config/api.config.js')
+var uuid = require('../../lib/uuid/we-uuidv4');
+var util = require('../../utils/util.js')
 
 Page({
   /**
@@ -9,7 +11,7 @@ Page({
   data: {
     toast1Hidden: true,
     modalHidden: true,
-    modalHidden2: true,  
+    modalHidden2: true,
   },
   // 点击下拉显示框
   selectTap() {
@@ -19,7 +21,7 @@ Page({
   },
   // 点击下拉列表
   optionTap(e) {
-    let zone = e.currentTarget.dataset.zone;//获取点击的下拉列表的下标
+    let zone = e.currentTarget.dataset.zone; //获取点击的下拉列表的下标
     this.setData({
       zone: zone,
       show: !this.data.show
@@ -31,43 +33,34 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var user = wx.getStorageSync('cookie') || []
-    // var name = wx.getStorageSync('name') || []
-    // var card = wx.getStorageSync('card') || []
+    var cookie = wx.getStorageSync('cookie') || []
 
-    console.log(user)
+    console.log(cookie)
     this.setData({
-      user: user,
-      openid: user.openid,
-      // name:name,
-      // card:card,
+      cookie: cookie,
+      openid: cookie.openid,
       zone: wx.getStorageSync('zone') || []
     })
 
+    console.log(cookie.openid);
+    var openid = cookie.openid;
 
-    /**
-  * 发起请求获取订单列表信息
-  */
-    var openid = user.openid;
+    var url = api.applyUrl
+    var data = { search: { 'openid': openid } }
 
-    wx.request({
-      method: 'GET',
-      url: api.applyUrl,  
-      data: { openid },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        console.log(res.data) //获取openid  
-        console.log(res.data.data.rows[0].zheng)
+    util.http('GET', url, data, (res) => {
+      if (res.errMsg) {
+        util.showModel(res.errMsg);
+      } else {
+        console.log('### apply.js  --------------- applyUrl ----------------success')
+        console.log(res.data)
+        // console.log(res.data.rows[0])
         that.setData({
-          zheng: res.data.data.rows[0].zheng,
-          fan: res.data.data.rows[0].fan,
-          he: res.data.data.rows[0].he
+          user: res.data.rows[0]
+
         })
       }
     })
-
   },
 
   /**
@@ -81,6 +74,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this;
+    var url = api.applyUrl;
+    var data = { search: { 'openid': that.data.openid } };
+    var header = "application/json";
+
+    util.http('GET', url, data, (res) => {
+      if (res.errMsg) {
+        util.showModel(res.errMsg);
+      } else {
+        // this.setData({
+        //   goods: res.data.rows
+        // })
+        console.log(res.data)
+      }
+    })
 
   },
 
@@ -125,6 +133,7 @@ Page({
 
 
   chooseImage: function (e) {
+    console.log('### apply.js  --------------- chooseImage ----------------enter')
     var that = this;
     console.log(e.target.dataset.name)
     that.setData({
@@ -148,8 +157,9 @@ Page({
 
         var uploadImgCount = 0;
         for (var i = 0, h = tempFilePaths.length; i < h; i++) {
+          console.log('### apply.js  --------------- chooseImage ----------------1')
           const uploadTask = wx.uploadFile({
-            url: api.singleUpload.url,//'https://www.donghl.cn/upload-single', //图片插入接口，此处为单个文件处理，多个文件则用循环处理 
+            url: api.singleUploadUrl, //'https://www.donghl.cn/api/v1/upload', //图片插入接口，此处为单个文件处理，多个文件则用循环处理 
             filePath: tempFilePaths[i],
             name: 'myfile',
             formData: {
@@ -157,12 +167,13 @@ Page({
               'collection': 'apply',
               'openid': user.openid,
               'arr': 'pics',
-              'key': e.target.dataset.name   //图片在数组里面的索引
+              'key': e.target.dataset.name //图片在数组里面的索引
             },
             header: {
               "Content-Type": "multipart/form-data"
             },
             success: function (res) {
+              console.log('### apply.js  --------------- chooseImage ----------------success')
               uploadImgCount++;
               var data = res.data
               //do something
@@ -174,10 +185,13 @@ Page({
                   title: '错误提示',
                   content: '上传图片失败',
                   showCancel: false,
-                  success: function (res) {
-                  }
+                  success: function (res) { }
                 })
               }
+            },
+            fail:function(res){
+              console.log('### apply.js  --------------- chooseImage ----------------error')
+              console.log(res)
             }
           })
 
@@ -199,23 +213,31 @@ Page({
     var that = this;
     console.log(e.detail)
 
-    let name, card,zone;
-    that.setData({
-      name: e.detail.value.name,
-      card: e.detail.value.card,
-      // zone:e.detail.value.picker
-    })
+    let name, card, zone;
+    // that.setData({
+    //   name: e.detail.value.name,
+    //   card: e.detail.value.card,
+    //   // zone:e.detail.value.picker
+    // })
 
 
-    wx.setStorageSync('name', that.data.name)
-    wx.setStorageSync('card', that.data.card)
-    // wx.setStorageSync('zone', that.data.zone)
-    
+    wx.setStorageSync('name', e.detail.value.name)
+    wx.setStorageSync('card', e.detail.value.card)
+
     wx.request({
-      url: api.applyUrl,//
+      url: api.applyUrl, //
       method: "PUT",
-      data: { key:{ 'openid':that.data.openid},
-        value: { "name": that.data.name, "card": that.data.card, 'zone': wx.getStorageSync('zone'), 'status':1} },
+      data: {
+        key: {
+          'openid': that.data.openid
+        },
+        value: {
+          "name": e.detail.value.name,
+          "card": e.detail.value.card,
+          'zone': wx.getStorageSync('zone'),
+          'status': 1
+        }
+      },
       success(res) {
 
         console.log(res.header)

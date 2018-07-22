@@ -1,0 +1,50 @@
+page {
+  font-size: 30rpx;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.info_list {
+  height: 100rpx;
+  line-height: 100rpx;
+  width: 100%;
+  border-bottom: 1px solid #bcbcbd;
+  padding-left: 24rpx;
+  display: inline-block;
+  /* font-size: 33rpx; */
+}
+
+.shouji_info input {
+  margin-top: 25rpx;
+  /* background: rebeccapurple; */
+}
+
+.code_btn {
+  width: 35%;
+  /* margin-right: 20rpx; */
+  height: 82rpx;
+  margin-top: 12rpx;
+  line-height: 82rpx;
+  border-radius: 15rpx;
+  padding: 0 10rpx;
+}
+
+.yanzheng_btn {
+  width: 35%;
+  background: #929fff;
+  /* margin-right: 20 rpx; */
+  height: 82rpx;
+  margin-top: 12rpx;
+  text-align: center;
+  line-height: 82rpx;
+  border-radius: 15rpx;
+  color: #fff;
+  font-size: 33rpx;
+  padding: 0 10rpx;
+}

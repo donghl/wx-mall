@@ -12,6 +12,11 @@ Page({
     }
   },
 
+  onLoad: function (){
+    console.log('### cart.js ----------  onload ---------------------- ')
+    console.log(app.gData.cartList)
+  },
+
   onShow() {
     console.log('---------------------- cart  onShow------------------------------')
     console.log(app.gData.cartList);

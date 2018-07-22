@@ -1,0 +1,29 @@
+<view class='main'>
+
+  <form bindsubmit='submitForm'>
+
+
+    <view class='shouji_info'>
+      <view class='info_list'>
+        <input placeholder='请输入手机号' name='phone' bindinput="phoneInput" value='13161959188'></input>
+      </view>
+      <view class='info_list'>
+        <input class='left' placeholder='输入右边数字' bindinput="codeInput"></input>
+        <canvas class='right code_btn' canvas-id="canvas"></canvas>
+
+      </view>
+      <view class='info_list'>
+        <input class='left' placeholder='验证码' name='code'></input>
+        <button class='right yanzheng_btn' bindtap="bindButtonTap" disabled='{{disabled}}' style="background-color:{{color}}">{{text}}</button>
+      </view>
+    </view>
+
+
+    <view>
+      <button type="primary" class="save-btn" formType='submit'>提交</button>
+      <!-- <button class='save-btn' form-type='submit'>提交</button> -->
+    </view>
+
+  </form>
+
+</view>

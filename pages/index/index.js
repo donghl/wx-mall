@@ -6,8 +6,8 @@ var app = getApp()
 
 Page({
   data: {
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    damoHeight: '100',//demo高度
+    // canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    damoHeight: '100', //demo高度
     imgUrls: [
       '/image/c0.png',
       '/image/list1.png',
@@ -23,8 +23,8 @@ Page({
   onPageScroll: function (res) {
     console.log(res.scrollTop);
   },
-  
-  onShow:function(){
+
+  onShow: function () {
     console.log('index-------------- onShow  -------------- ')
     // var userinfo = util.getUserInfo();
     // console.log(userinfo);
@@ -32,7 +32,7 @@ Page({
 
   },
 
-  onLoad: function () {
+  onLoad: function (e) {
     console.log('### index.js-------------- onLoad  -------------- ')
     console.log(app.gData);
     var that = this
@@ -48,8 +48,9 @@ Page({
         inputHeight: app.gData.screenHightScale * 177
       })
     })
+    util.getIpAddress(this);
   },
-  goList(e){
+  goList(e) {
     console.log(e);
     wx.navigateTo({
       url: '../../pages/goods/list?type=' + e.currentTarget.dataset.type + '&category=' + e.currentTarget.dataset.category,

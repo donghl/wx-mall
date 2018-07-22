@@ -4,6 +4,7 @@
     "pages/temp/index",
     "pages/temp/demo1",
     "pages/temp/test",
+    "pages/temp/test1",
     "pages/temp/pic",
     "pages/temp/question-ask",
     "pages/category/category",
@@ -12,13 +13,18 @@
     "pages/goods/details",
     "pages/goods/edit",
     "pages/goods/add",
+    "pages/goods/more",
     "pages/orders/list",
     "pages/orders/orders",
+    "pages/orders/confirm",
     "pages/guide/demo",
     "pages/guide/index",
     "pages/guide/goods",
     "pages/guide/edit",
+    "pages/guide/more",
     "pages/user/user",
+    "pages/user/wx",
+    "pages/user/phone",
     "pages/apply/apply"
   ],
   "window": {
@@ -41,10 +47,10 @@
         "text": "主页"
       },
       {
-        "pagePath": "pages/temp/question-ask",
+        "pagePath": "pages/orders/confirm",
         "iconPath": "image/button/22.png",
         "selectedIconPath": "image/button/21.png",
-        "text": "TEST"
+        "text": "导购"
       },
       {
         "pagePath": "pages/category/category",

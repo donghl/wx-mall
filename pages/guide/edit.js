@@ -1,10 +1,17 @@
 // pages/goods/edit.js
 var api = require('../../config/api.config.js');
 var util = require('../../utils/util.js')
-import { promisify } from '../../utils/promise.util'
-import { $init, $digest } from '../../utils/common.util'
-import { createQuestion } from '../../services/question.service'
-import config from '../../config/config'
+import {
+  promisify
+} from '../../utils/promise.util'
+import {
+  $init,
+  $digest
+} from '../../utils/common.util'
+import {
+  createQuestion
+} from '../../services/question.service'
+import cfg from '../../config/config'
 
 const wxUploadFile = promisify(wx.uploadFile)
 
@@ -23,8 +30,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(e) {
-    console.log(e)
+  onLoad: function () {
     $init(this)
   },
 
@@ -121,26 +127,28 @@ Page({
 
 
   submitForm(e) {
+    console.log(e)
+
     const title = this.data.title
     const content = this.data.content
     var cookie = wx.getStorageSync('cookie') || []
 
     if (title && content) {
       const arr = []
-
+      
       for (let path of this.data.images) {
         arr.push(wxUploadFile({
           // url: config.urls.question + '/image/upload',
-          url: api.singleUpload.url,
+          url: api.singleUploadUrl,
           filePath: path,
-          
+
           name: 'myfile',
           formData: {
             'subpath': 'guide',
             'collection': 'guide',
             'openid': cookie.openid,
             'arr': 'theme',
-            'key':'key'
+            'key': 'key'
           },
         }))
       }

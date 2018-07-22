@@ -6,7 +6,7 @@ App({
   onLaunch: function () {
     console.log('### app.js --------------- App Launch----------------')
     console.log(api);
-   
+
 
     var that = this
     wx.getSystemInfo({
@@ -22,17 +22,23 @@ App({
     wx.login({
       success: function (res) {
         console.log('### app.js --------------- wx.login ----------------success')
-        var appid = cfg.appid;//''; //填写微信小程序appid  
-        var secret = cfg.secret; //''; //填写微信小程序secret
 
         console.log(res.code);
 
         if (res.code) {
           var code = res.code;
+          var appid = cfg.appid; //''; //填写微信小程序appid  
+          var secret = cfg.secret; //''; //填写微信小程序secret
 
-          var url = api.wxUrl;
-          var data = { code, appid, secret };
+          var url = api.openIdUrl;
+          var data = {
+            code,
+            appid,
+            secret
+          };
           var header = "application/json";
+
+          console.log('### app.js--------------- wx.login ======' + JSON.stringify(data));
 
           util.http('GET', url, data, (res) => {
 
@@ -71,8 +77,8 @@ App({
               wx.setStorageSync('user', res.userInfo)
               that.gData.userInfo = res.userInfo
               typeof cb == "function" && cb(that.gData.userInfo)
-              var userInfo = res.userInfo; 
-            //------------------------------------------------------------------------------------------------
+              var userInfo = res.userInfo;
+              //------------------------------------------------------------------------------------------------
             }
           })
         }
@@ -81,9 +87,14 @@ App({
   },
 
   Init: function (e) {
+    var self = this
     console.log('### app.js ----------------- app Init ----------------- ')
     var that = this;
     util.getCategory();
+
+
+
+    console.log('############ app.gData :' + JSON.stringify(self.gData))
   },
 
   // lazy loading openid
@@ -98,11 +109,13 @@ App({
           wx.request({
             url: api.openIdUrl,
             data: {
-              code: data.code
+              code: data.code,
+              appid: cfg.appid, //''; //填写微信小程序appid  
+              secret: cfg.secret //''; //填写微信小程序secret
             },
             success: function (res) {
               console.log('拉取openid成功', res)
-              self.gData.openid = res.data.openid
+              self.gData.openid = res.data.data.openid
               callback(null, self.gData.openid)
             },
             fail: function (res) {
@@ -118,16 +131,17 @@ App({
       })
     }
   },
-  gData: {  //全局变量
+  gData: { //全局变量
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     openid: null,
-    serverUrl:'',   //服务器域名信息
+    serverUrl: '', //服务器域名信息
     userInfo: null, //用户信息
     screenWidthScale: 0.0,
     screenHightScale: 0.0,
     screenWidth: 0,
     screenHight: 0,
     hasLogin: false,
-    cartList: [],               // 购物车列表
+    cartList: [], // 购物车列表
+
   }
 })
-

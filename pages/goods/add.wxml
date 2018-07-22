@@ -1,80 +1,86 @@
-<view class="container">
-  <view id="panel" class="flex-column">
-    <form bindsubmit='submitForm' bindreset='reset'>
-      <view class="flex-view-item">
-        <view class="flex-row">
-          <view class="flex-view-item">填写商品信息-></view>
-          <view class="flex-view-item">拍照-></view>
-          <view class="flex-view-item">提交-></view>
-          <view class="flex-view-item">审核-></view>
-          <view class="flex-view-item">发布</view>
-        </view>
-      </view>
-
-      <view class="flex-view-item">
-        <view class="flex-row">
-          <text class='font'>标题</text>
-        </view>
-
-        <view class="edit.cem">
-          <input name="name" bindinput="handleTitleInput" data-name="{{goods.name}}" placeholder="例如：xx品牌 xx 商品" />
-          <view class="title-input-counter">{{titleCount}}/10</view>
-        </view>
-      </view>
-
-      <view class="flex-view-item">
-        <picker mode="multiSelector" name='type' bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range-key="{{'name'}}" range="{{multiArray}}">
-          <view class="picker">
-            分类：{{multiArray[0][multiIndex[0]].name}}，{{multiArray[1][multiIndex[1]].name}}
+<view class="main">
+  <view class="container">
+    <view id="panel" class="flex-column">
+      <form bindsubmit='submitForm' bindreset='reset'>
+        <view class="flex-view-item">
+          <view class="flex-row">
+            <view class="flex-view-item">填写商品信息-></view>
+            <view class="flex-view-item">拍照-></view>
+            <view class="flex-view-item">提交-></view>
+            <view class="flex-view-item">审核-></view>
+            <view class="flex-view-item">发布</view>
           </view>
-        </picker>
-        <view class="button.aa">
-          <button class="button.aa" size="mini" id='1' data-name='codes' bindtap='chooseImage' plain='true'>照片</button>
         </view>
 
-        <!-- 图片缩略图  -->
-        <view class="goods-images">
-          <block wx:for="{{images}}" wx:key="*this">
-            <view class="q-image-wrap">
-              <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
-              <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage">删除</view>
+        <view class="flex-view-item">
+          <view class="flex-row">
+            <text class='font'>标题</text>
+          </view>
+
+          <view class="edit.cem">
+            <input name="name" bindinput="handleTitleInput" data-name="{{goods.name}}" placeholder="例如：xx品牌 xx 商品" />
+            <view class="title-input-counter">{{titleCount}}/10</view>
+          </view>
+        </view>
+
+        <view class="flex-view-item">
+          <picker mode="multiSelector" name='type' bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range-key="{{'name'}}" range="{{multiArray}}">
+            <view class="picker">
+              分类：{{multiArray[0][multiIndex[0]].name}}，{{multiArray[1][multiIndex[1]].name}}
             </view>
-          </block>
-        </view>
-      </view>
-      <view class="flex-view-item">
-        <view class="flex-row">
-          <text class='font'>详细信息</text>
-        </view>
-      </view>
-      <view class="section">
-        <textarea id='dd1' name='detail' data-detail="{{goods.detail}}" auto-height placeholder="例如：x种颜色可选" />
-      </view>
+          </picker>
+          <view class="button.aa">
+            <button class="button.aa" size="mini" id='1' data-name='codes' bindtap='chooseImage' plain='true'>照片</button>
+          </view>
 
-      <view class="flex-view-item">
-        <view class="flex-row">
-          单买价格
-          <input name='p1' style="width:25%;" data-value='{{p1}}' type="digit" /> 团购价格
-          <input name='p2' style="width:25%;" data-value='{{p2}}' type="digit" />
-        </view>
-      </view>
-
-
-      <view class="flex-row" style="display: flex;flex-direction: row;justify-content:space-between">
-        <view class="flex-view-item">
-          <label>库存</label>
+          <!-- 图片缩略图  -->
+          <view class="goods-images">
+            <block wx:for="{{images}}" wx:key="*this">
+              <view class="q-image-wrap">
+                <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+                <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage">删除</view>
+              </view>
+            </block>
+          </view>
         </view>
         <view class="flex-view-item">
-          <input name='stock' type='number' />
+          <view class="flex-row">
+            <text class='font'>详细信息</text>
+
+          </view>
         </view>
-      </view>
+        <view class="section">
+          <!-- <textarea id='dd1' name='detail' data-detail="{{goods.detail}}" auto-height placeholder="例如：x种颜色可选" /> -->
+
+          <textarea class="weui-textarea" placeholder="例如：x种颜色可选" maxlength="200" placeholder-style="color:#b3b3b3;font-size:14px;" style="height: 4rem" bindinput="handleContentInput" />
+          <view class="weui-textarea-counter">{{contentCount}}/200</view>
+        </view>
+
+        <view class="flex-view-item">
+          <view class="flex-row">
+            单买价格
+            <input name='p1' style="width:25%;" data-value='{{p1}}' type="digit" /> 团购价格
+            <input name='p2' style="width:25%;" data-value='{{p2}}' type="digit" />
+          </view>
+        </view>
+
+
+        <view class="flex-row" style="display: flex;flex-direction: row;justify-content:space-between">
+          <view class="flex-view-item">
+            <label>库存</label>
+          </view>
+          <view class="flex-view-item">
+            <input name='stock' type='number' />
+          </view>
+        </view>
 
 
 
-      <view style="background-color:#ffff;">
-        <button type="primary" class="save-btn" formType='submit'>提交</button>
-        <button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>
-      </view>
-    </form>
+        <view style="background-color:#ffff;">
+          <button type="primary" class="save-btn" formType='submit'>提交</button>
+          <button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>
+        </view>
+      </form>
+    </view>
   </view>
 </view>

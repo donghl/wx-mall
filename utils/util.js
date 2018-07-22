@@ -23,6 +23,20 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+function randomNum(minNum, maxNum) {
+  switch (arguments.length) {
+    case 1:
+      return parseInt(Math.random() * minNum + 1, 10);
+      break;
+    case 2:
+      return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+      break;
+    default:
+      return 0;
+      break;
+  }
+}
+
 var getSystemInfo = text => wx.getSystemInfo({
   success: function (res) {
     console.log(res.model)
@@ -64,7 +78,7 @@ var uploadFile = (data) => {
   var uploadImgCount = 0;
   for (var i = 0, h = data.files.length; i < h; i++) {
     wx.uploadFile({
-      url: api.multiUpload.url,// , //图片插入接口，此处为单个文件处理，多个文件则用循环处理 
+      url: api.multiUpload.url, // , //图片插入接口，此处为单个文件处理，多个文件则用循环处理 
       filePath: data.path[i],
       name: 'myfile',
       // formData: {
@@ -91,8 +105,7 @@ var uploadFile = (data) => {
             title: '错误提示',
             content: '上传图片失败',
             showCancel: false,
-            success: function (res) {
-            }
+            success: function (res) { }
           })
         }
       }
@@ -101,7 +114,7 @@ var uploadFile = (data) => {
 }
 // 请求
 var http = (method, url, data, fun, header, auth) => {
-  console.log('### util.js ======================util.http :',method,url)
+  console.log('### util.js ======================util.http :', method, url)
   console.log(method);
   console.log(url)
   console.log(data);
@@ -129,9 +142,9 @@ var http = (method, url, data, fun, header, auth) => {
 
 function imageUtil(e) {
   var imageSize = {};
-  var originalWidth = e.detail.width;//图片原始宽  
-  var originalHeight = e.detail.height;//图片原始高  
-  var originalScale = originalHeight / originalWidth;//图片高宽比  
+  var originalWidth = e.detail.width; //图片原始宽  
+  var originalHeight = e.detail.height; //图片原始高  
+  var originalScale = originalHeight / originalWidth; //图片高宽比  
   console.log('originalWidth: ' + originalWidth)
   console.log('originalHeight: ' + originalHeight)
   //获取屏幕宽高  
@@ -139,14 +152,14 @@ function imageUtil(e) {
     success: function (res) {
       var windowWidth = res.windowWidth;
       var windowHeight = res.windowHeight;
-      var windowscale = windowHeight / windowWidth;//屏幕高宽比  
+      var windowscale = windowHeight / windowWidth; //屏幕高宽比  
       console.log('windowWidth: ' + windowWidth)
       console.log('windowHeight: ' + windowHeight)
-      if (originalScale < windowscale) {//图片高宽比小于屏幕高宽比  
+      if (originalScale < windowscale) { //图片高宽比小于屏幕高宽比  
         //图片缩放后的宽为屏幕宽  
         imageSize.imageWidth = windowWidth;
         imageSize.imageHeight = (windowWidth * originalHeight) / originalWidth;
-      } else {//图片高宽比大于屏幕高宽比  
+      } else { //图片高宽比大于屏幕高宽比  
         //图片缩放后的高为屏幕高  
         imageSize.imageHeight = windowHeight;
         imageSize.imageWidth = (windowHeight * originalWidth) / originalHeight;
@@ -157,6 +170,18 @@ function imageUtil(e) {
   console.log('缩放后的宽: ' + imageSize.imageWidth)
   console.log('缩放后的高: ' + imageSize.imageHeight)
   return imageSize;
+}
+
+function getIpAddress(event) {
+  let that = this;
+  console.log('util -------------- getIpAddress -------------- ', event)
+  wx.request({
+    url: 'http://ip-api.com/json',
+    success: function (e) {
+      console.log(e.data);
+      wx.setStorageSync('ipaddress', e.data)
+    }
+  })
 }
 
 function getLocation(e) {
@@ -196,6 +221,7 @@ function getLocation(e) {
     }
   })
 }
+
 function getCategory() {
   console.log(' util --------------- getCategory  ---------------- ')
   let cc = wx.getStorageSync('category')
@@ -267,4 +293,15 @@ function getUserInfo() {
   })
 }
 
-module.exports = { formatTime, showBusy, showSuccess, showModel, http, getSystemInfo, getLocation, imageUtil, getCategory }
+module.exports = {
+  formatTime,
+  showBusy,
+  showSuccess,
+  showModel,
+  http,
+  getSystemInfo,
+  getIpAddress,
+  getLocation,
+  imageUtil,
+  getCategory
+}
